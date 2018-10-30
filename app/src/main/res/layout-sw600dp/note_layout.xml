@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/noteRoot"
-    android:background="@color/dark_gray">
+    android:background="@color/turquoise">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/noteToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         style="@style/HeaderBar"
+        android:background="@color/turquoise"
         android:elevation="4dp"/>
 
     <TextView

@@ -89,8 +89,8 @@ public class Note extends MainActivity {
         dbResult.close();
 
 
-            noteRoot.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            noteToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            noteRoot.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            noteToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             noteTextView.setTextColor(Color.parseColor("#000000"));
             noteToolbar.setTitleTextColor(Color.parseColor("#000000"));
             noteToolbar.setSubtitleTextColor(Color.parseColor("#666666"));
