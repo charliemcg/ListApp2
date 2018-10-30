@@ -108,8 +108,6 @@ public class MainActivity extends AppCompatActivity implements
     static boolean completeTask;
     //Used to determine if sound effects should play or not
     static boolean mute;
-    //Used to determine what colour scheme to use
-    static boolean lightDark;
     //used to indicate if color picker is showing
     static boolean colorPickerShowing;
     //used to indicate if purchase options are showing
@@ -293,13 +291,11 @@ public class MainActivity extends AppCompatActivity implements
     static MediaPlayer hint;
 
     //The action bar
-    private Toolbar toolbarDark;
     private Toolbar toolbarLight;
     static RelativeLayout.LayoutParams toolbarParams;
 
     //Action bar options
     MenuItem muteBtn;
-    MenuItem lightDarkBtn;
     MenuItem customiseBtn;
     MenuItem proBtn;
     MenuItem autoColorBtn;
@@ -346,16 +342,13 @@ public class MainActivity extends AppCompatActivity implements
 
 //        MobileAds.initialize(this, /*app id here*/);//TODO get app id from admob
 
-        toolbarDark = findViewById(R.id.toolbar_dark);
         toolbarLight = findViewById(R.id.toolbar_light);
-        setSupportActionBar(toolbarDark);
         setSupportActionBar(toolbarLight);
 
         //Initialising variables
         taskPropertiesShowing = false;
         tasksAreClickable = true;
         taskList = new ArrayList<>();
-        noTasksToShow = findViewById(R.id.noTasks);
         noTasksToShowWhite = findViewById(R.id.noTasksWhite);
         taskNameEditText = findViewById(R.id.taskNameEditText);
         add = findViewById(R.id.add);
@@ -450,7 +443,7 @@ public class MainActivity extends AppCompatActivity implements
         unlockAllImg = findViewById(R.id.unlockAllImage);
         unlockAllPurchasedImg = findViewById(R.id.unlockAllImagePurchased);
         toastParams = (RelativeLayout.LayoutParams) toastView.getLayoutParams();
-        toolbarParams = (RelativeLayout.LayoutParams) toolbarDark.getLayoutParams();
+        toolbarParams = (RelativeLayout.LayoutParams) toolbarLight.getLayoutParams();
         theListView.setOnScrollListener(this);
         blockSoundAndAnimate = false;
         justReinstated = false;
@@ -461,7 +454,6 @@ public class MainActivity extends AppCompatActivity implements
         Cursor dbResult = MainActivity.db.getUniversalData();
         while (dbResult.moveToNext()) {
             highlight = dbResult.getString(2);
-            lightDark = dbResult.getInt(3) > 0;
             adsRemoved = dbResult.getInt(5) > 0;
             remindersAvailable = dbResult.getInt(6) > 0;
             colorCyclingAllowed = dbResult.getInt(7) > 0;
@@ -472,14 +464,11 @@ public class MainActivity extends AppCompatActivity implements
         //Put data in list
         theListView.setAdapter(theAdapter[0]);
 
-        toolbarDark.setTitleTextColor(Color.parseColor(highlight));
         toolbarLight.setTitleTextColor(Color.parseColor(highlight));
 
         addIcon.setTextColor(Color.parseColor(highlight));
         taskNameEditText.setBackgroundColor(Color.parseColor(highlight));
         toast.setBackgroundColor(Color.parseColor(highlight));
-
-        checkLightDark(lightDark);
 
         //Make task clickable
         theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -952,60 +941,21 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void switchColor() {
-        if(!lightDark) {
-            int i = random.nextInt(darkHighlights.length);
-            db.updateHighlight(darkHighlights[i]);
-            db.updateHighlightDec(darkHighlightsDec[i]);
-            Calendar cal = Calendar.getInstance();
-            db.updateColorLastChanged((int) (cal.getTimeInMillis() / 1000 / 60 / 60));
-            highlightDec = darkHighlightsDec[i];
-            highlight = darkHighlights[i];
-        }else{
-            int i = random.nextInt(lightHighlights.length);
-            db.updateHighlight(lightHighlights[i]);
-            db.updateHighlightDec(lightHighlightsDec[i]);
-            Calendar cal = Calendar.getInstance();
-            db.updateColorLastChanged((int) (cal.getTimeInMillis() / 1000 / 60 / 60));
-            highlightDec = lightHighlightsDec[i];
-            highlight = lightHighlights[i];
-        }
-        toolbarDark.setTitleTextColor(Color.parseColor(highlight));
+        int i = random.nextInt(lightHighlights.length);
+        db.updateHighlight(lightHighlights[i]);
+        db.updateHighlightDec(lightHighlightsDec[i]);
+        Calendar cal = Calendar.getInstance();
+        db.updateColorLastChanged((int) (cal.getTimeInMillis() / 1000 / 60 / 60));
+        highlightDec = lightHighlightsDec[i];
+        highlight = lightHighlights[i];
         toolbarLight.setTitleTextColor(Color.parseColor(highlight));
         addIcon.setTextColor(Color.parseColor(highlight));
         taskNameEditText.setBackgroundColor(Color.parseColor(highlight));
         toast.setBackgroundColor(Color.parseColor(highlight));
-        setDividers(lightDark);
     }
 
-    private void checkLightDark(boolean lightDark) {
-        if(!lightDark){
-            theListView.setBackgroundColor(Color.parseColor("#333333"));
-            toolbarLight.setVisibility(View.INVISIBLE);
-            toolbarDark.setVisibility(View.VISIBLE);
-            setSupportActionBar(toolbarDark);
-            removeAdsTitle.setTextColor(Color.parseColor("#AAAAAA"));
-            removeAdsDescription.setTextColor(Color.parseColor("#AAAAAA"));
-            getRemindersTitle.setTextColor(Color.parseColor("#AAAAAA"));
-            getRemindersDescription.setTextColor(Color.parseColor("#AAAAAA"));
-            cycleColorsTitle.setTextColor(Color.parseColor("#AAAAAA"));
-            cycleColorsDescription.setTextColor(Color.parseColor("#AAAAAA"));
-            unlockAllTitle.setTextColor(Color.parseColor("#AAAAAA"));
-            unlockAllDescription.setTextColor(Color.parseColor("#AAAAAA"));
-            purchases.setBackgroundDrawable(ContextCompat.getDrawable
-                    (this, R.drawable.color_picker_border));
-            removeAdsLayout.setBackgroundDrawable(ContextCompat.getDrawable
-                    (this, R.drawable.color_picker_border));
-            getRemindersLayout.setBackgroundDrawable(ContextCompat.getDrawable
-                    (this, R.drawable.color_picker_border));
-            cycleColorsLayout.setBackgroundDrawable(ContextCompat.getDrawable
-                    (this, R.drawable.color_picker_border));
-            unlockAllLayout.setBackgroundDrawable(ContextCompat.getDrawable
-                    (this, R.drawable.color_picker_border));
-            setDividers(lightDark);
-            theListView.setAdapter(theAdapter[0]);
-        }else{
-            theListView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            toolbarDark.setVisibility(View.INVISIBLE);
+    private void checkLightDark() {
+//            theListView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             toolbarLight.setVisibility(View.VISIBLE);
             setSupportActionBar(toolbarLight);
             removeAdsTitle.setTextColor(Color.parseColor("#000000"));
@@ -1026,30 +976,18 @@ public class MainActivity extends AppCompatActivity implements
                     (this, R.drawable.purchases_dropshadow));
             unlockAllLayout.setBackgroundDrawable(ContextCompat.getDrawable
                     (this, R.drawable.purchases_dropshadow));
-            setDividers(lightDark);
             theListView.setAdapter(theAdapter[0]);
-        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!menu.hasVisibleItems()) {
             getMenuInflater().inflate(R.menu.menu_main, menu);
-//            if (!lightDark) {
-//                customiseBtn = this.toolbarDark.getMenu().findItem(R.id.highlight);
-//                proBtn = this.toolbarDark.getMenu().findItem(R.id.buy);
-//                autoColorBtn = this.toolbarDark.getMenu().findItem(R.id.autoColor);
-//                motivationBtn = this.toolbarDark.getMenu().findItem(R.id.motivation);
-//                muteBtn = this.toolbarDark.getMenu().findItem(R.id.mute);
-//                lightDarkBtn.setChecked(true);
-//            } else {
                 customiseBtn = this.toolbarLight.getMenu().findItem(R.id.highlight);
                 proBtn = this.toolbarLight.getMenu().findItem(R.id.buy);
                 autoColorBtn = this.toolbarLight.getMenu().findItem(R.id.autoColor);
                 motivationBtn = this.toolbarLight.getMenu().findItem(R.id.motivation);
                 muteBtn = this.toolbarLight.getMenu().findItem(R.id.mute);
-//                lightDarkBtn.setChecked(false);
-//            }
             if(showMotivation){
                 motivationBtn.setChecked(true);
             }
@@ -1098,12 +1036,7 @@ public class MainActivity extends AppCompatActivity implements
         //Actions to occur if user selects 'color'
         } else if (id == R.id.highlight) {
 
-            int colorPickerTheme;
-            if(lightDark){
-                colorPickerTheme = R.style.ColorPickerThemeLight;
-            }else{
-                colorPickerTheme = R.style.ColorPickerThemeDark;
-            }
+            int colorPickerTheme = R.style.ColorPickerThemeLight;
 
             ColorPickerDialogBuilder
                     .with(MainActivity.this, colorPickerTheme).setTitle(getString(R.string.chooseColor))
@@ -1113,7 +1046,6 @@ public class MainActivity extends AppCompatActivity implements
                 @Override
                 public void onColorSelected(int selectedColor) {
                     String tempHighlight = "#" + Integer.toHexString(selectedColor);
-                    toolbarDark.setTitleTextColor(Color.parseColor(tempHighlight));
                     toolbarLight.setTitleTextColor(Color.parseColor(tempHighlight));
                     addIcon.setTextColor(Color.parseColor(tempHighlight));
                     taskNameEditText.setBackgroundColor(Color.parseColor(tempHighlight));
@@ -1130,17 +1062,14 @@ public class MainActivity extends AppCompatActivity implements
                     int[] colors = {0, selectedColor, 0};
                     theListView.setDivider(new GradientDrawable
                             (GradientDrawable.Orientation.RIGHT_LEFT, colors));
-                    if(!lightDark) {
-                        theListView.setDividerHeight(1);
-                    }else{
+
                         theListView.setDividerHeight(3);
-                    }
+
                     theListView.setAdapter(theAdapter[0]);
                 }
             }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    toolbarDark.setTitleTextColor(Color.parseColor(highlight));
                     toolbarLight.setTitleTextColor(Color.parseColor(highlight));
                     addIcon.setTextColor(Color.parseColor(highlight));
                     taskNameEditText.setBackgroundColor(Color.parseColor(highlight));
@@ -1155,11 +1084,9 @@ public class MainActivity extends AppCompatActivity implements
             add.setClickable(false);
             theListView.setOnItemClickListener(null);
             taskPropertiesShowing = false;
-            if(lightDark){
+
                 onCreateOptionsMenu(toolbarLight.getMenu());
-            }else {
-                onCreateOptionsMenu(toolbarDark.getMenu());
-            }
+
             theListView.setAdapter(theAdapter[0]);
             purchases.startAnimation(AnimationUtils.loadAnimation
                     (this, R.anim.enter_from_right));
@@ -1194,11 +1121,9 @@ public class MainActivity extends AppCompatActivity implements
                 add.setClickable(false);
                 theListView.setOnItemClickListener(null);
                 taskPropertiesShowing = false;
-                if(lightDark){
+
                     onCreateOptionsMenu(toolbarLight.getMenu());
-                }else {
-                    onCreateOptionsMenu(toolbarDark.getMenu());
-                }
+
                 theListView.setAdapter(theAdapter[0]);
 
                 purchases.startAnimation(AnimationUtils.loadAnimation
@@ -1529,16 +1454,10 @@ public class MainActivity extends AppCompatActivity implements
         if (taskList.size() == 0){
 
             //Inform user to add some tasks
-            if(lightDark) {
-                noTasksToShow.setVisibility(View.GONE);
+
                 noTasksToShowWhite.setVisibility(View.VISIBLE);
-            }else{
-                noTasksToShowWhite.setVisibility(View.GONE);
-                noTasksToShow.setVisibility(View.VISIBLE);
-            }
 
         }else{
-            noTasksToShow.setVisibility(View.GONE);
             noTasksToShowWhite.setVisibility(View.GONE);
         }
 
@@ -1698,11 +1617,8 @@ public class MainActivity extends AppCompatActivity implements
 
         add.setClickable(true);
 
-        if(lightDark) {
             onCreateOptionsMenu(toolbarLight.getMenu());
-        }else{
-            onCreateOptionsMenu(toolbarDark.getMenu());
-        }
+
 
         theListView.setAdapter(theAdapter[0]);
 
@@ -1764,32 +1680,15 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void setDividers(boolean lightDark) {
-        if(!lightDark) {
-            int[] colors = {0, Integer.parseInt(highlightDec), 0};
-            theListView.setDivider(new GradientDrawable
-                    (GradientDrawable.Orientation.RIGHT_LEFT, colors));
-            theListView.setDividerHeight(1);
-        }else{
-            int[] colors = {Color.parseColor("#FFFFFF"), Integer.parseInt(highlightDec),
-                    Color.parseColor("#FFFFFF")};
-            theListView.setDivider(new GradientDrawable
-                    (GradientDrawable.Orientation.RIGHT_LEFT, colors));
-            theListView.setDividerHeight(3);
-        }
-    }
-
     public void showPro(View view) {
 
         purchasesShowing = true;
         add.setClickable(false);
         theListView.setOnItemClickListener(null);
         taskPropertiesShowing = false;
-        if(lightDark) {
+
             onCreateOptionsMenu(toolbarLight.getMenu());
-        }else{
-            onCreateOptionsMenu(toolbarDark.getMenu());
-        }
+
         theListView.setAdapter(theAdapter[0]);
         purchases.startAnimation(AnimationUtils.loadAnimation
                 (this, R.anim.enter_from_right));
@@ -1844,11 +1743,8 @@ public class MainActivity extends AppCompatActivity implements
         final Dialog dialog = new Dialog(MainActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        if(lightDark) {
+
             dialog.setContentView(R.layout.review_dialog_light);
-        }else{
-            dialog.setContentView(R.layout.review_dialog);
-        }
 
         Button positive = dialog.findViewById(R.id.positive);
         Button negative = dialog.findViewById(R.id.negative);
@@ -2150,7 +2046,6 @@ public class MainActivity extends AppCompatActivity implements
         while (dbResult.moveToNext()) {
             mute = dbResult.getInt(1) > 0;
             highlight = dbResult.getString(2);
-            lightDark = dbResult.getInt(3) > 0;
             adsRemoved = dbResult.getInt(5) > 0;
             remindersAvailable = dbResult.getInt(6) > 0;
             colorCyclingAllowed = dbResult.getInt(7) > 0;
@@ -2176,7 +2071,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
 
-        checkLightDark(lightDark);
+        checkLightDark();
 
         ArrayList<Integer> tempSortedIDs = new ArrayList<>();
 

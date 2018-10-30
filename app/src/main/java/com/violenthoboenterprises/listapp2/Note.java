@@ -85,21 +85,15 @@ public class Note extends MainActivity {
         Cursor dbResult = MainActivity.db.getUniversalData();
         while (dbResult.moveToNext()) {
             mute = dbResult.getInt(1) > 0;
-            lightDark = dbResult.getInt(3) > 0;
         }
         dbResult.close();
 
-        if(!lightDark){
-            noteRoot.setBackgroundColor(Color.parseColor("#333333"));
-            noteToolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
-            noteToolbar.setSubtitleTextColor(Color.parseColor("#AAAAAA"));
-        }else{
+
             noteRoot.setBackgroundColor(Color.parseColor("#FFFFFF"));
             noteToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             noteTextView.setTextColor(Color.parseColor("#000000"));
             noteToolbar.setTitleTextColor(Color.parseColor("#000000"));
             noteToolbar.setSubtitleTextColor(Color.parseColor("#666666"));
-        }
 
         //keyboard will display the default edit text instead of the custom one without this line
         noteEditText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
@@ -381,7 +375,6 @@ public class Note extends MainActivity {
         Cursor dbResult = MainActivity.db.getUniversalData();
         while (dbResult.moveToNext()) {
             mute = dbResult.getInt(1) > 0;
-            lightDark = dbResult.getInt(3) > 0;
         }
         dbResult.close();
 

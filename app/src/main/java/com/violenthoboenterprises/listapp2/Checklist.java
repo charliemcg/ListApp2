@@ -80,7 +80,6 @@ public class Checklist extends MainActivity {
         toolbarParams = (RelativeLayout.LayoutParams) subTasksToolbar.getLayoutParams();
 
         String dbTaskId = "";
-        Boolean dbLightDark = false;
 
         int dbID = 0;
         String dbTask = "";
@@ -89,7 +88,6 @@ public class Checklist extends MainActivity {
         Cursor dbResult = MainActivity.db.getUniversalData();
         while (dbResult.moveToNext()) {
             dbTaskId = dbResult.getString(4);
-            dbLightDark = dbResult.getInt(3) > 0;
         }
 
         //getting subtask data
@@ -111,26 +109,16 @@ public class Checklist extends MainActivity {
         subTasksToolbar.setSubtitle(dbTask);
 
         //setting correct background color
-        if(!dbLightDark){
-            subTasksToolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
-            subTasksToolbar.setSubtitleTextColor(Color.parseColor("#AAAAAA"));
-            checklistView.setBackgroundColor(Color.parseColor("#333333"));
-            subTasksToolbar.setBackgroundColor(Color.parseColor("#333333"));
-            int[] colors = {0, Integer.parseInt(highlightDec), Integer.parseInt(highlightDec)};
-            checklistView.setDivider(new GradientDrawable(
-                    GradientDrawable.Orientation.LEFT_RIGHT, colors));
-            checklistView.setDividerHeight(1);
-        }else{
+
             subTasksToolbar.setTitleTextColor(Color.parseColor("#000000"));
             subTasksToolbar.setSubtitleTextColor(Color.parseColor("#666666"));
-            checklistView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            subTasksToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            checklistView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            subTasksToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             int[] colors = {Color.parseColor("#FFFFFF"), Integer.parseInt(highlightDec),
                     Integer.parseInt(highlightDec)};
             checklistView.setDivider(new GradientDrawable(
                     GradientDrawable.Orientation.LEFT_RIGHT, colors));
             checklistView.setDividerHeight(1);
-        }
 
         //setting up adapter
         checklistAdapter = new ListAdapter[]{new ChecklistAdapter(this, checklist)};

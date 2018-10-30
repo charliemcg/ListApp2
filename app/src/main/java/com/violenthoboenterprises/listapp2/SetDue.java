@@ -47,12 +47,10 @@ public class SetDue extends MainActivity {
     private Toolbar dueToolbar;
     LinearLayout dateButton;
     LinearLayout timeButton;
-    static LinearLayout darkRepeat;
     LinearLayout lightRepeat;
-    static ImageView time, timeFadedDark, timeFadedLight, calendar,
-            calendarFadedDark, calendarFadedLight;
-    ImageView dailyDark, weeklyDark, monthlyDark, cancelRepeatDark,
-            dailyLight, weeklyLight, monthlyLight, cancelRepeatLight;
+    static ImageView time, timeFadedLight, calendar,
+            calendarFadedLight;
+    ImageView dailyLight, weeklyLight, monthlyLight, cancelRepeatLight;
     View pickerRoot;
     TextView dateTextView;
     TextView timeTextView;
@@ -85,21 +83,14 @@ public class SetDue extends MainActivity {
 
         time = findViewById(R.id.time);
         timeFadedLight = findViewById(R.id.timeFadedLight);
-        timeFadedDark = findViewById(R.id.timeFadedDark);
         calendar = findViewById(R.id.calendar);
         calendarFadedLight = findViewById(R.id.calendarFadedLight);
-        calendarFadedDark = findViewById(R.id.calendarFadedDark);
         dateButton = findViewById(R.id.dateBtn);
         timeButton = findViewById(R.id.timeBtn);
-        darkRepeat = findViewById(R.id.darkRepeatLayout);
         lightRepeat = findViewById(R.id.lightRepeatLayout);
         pickerRoot = findViewById(R.id.pickerRoot);
         dateTextView = findViewById(R.id.dateTextView);
         timeTextView = findViewById(R.id.timeTextView);
-        dailyDark = findViewById(R.id.dailyDark);
-        weeklyDark = findViewById(R.id.weeklyDark);
-        monthlyDark = findViewById(R.id.monthlyDark);
-        cancelRepeatDark = findViewById(R.id.cancelRepeatDark);
         dailyLight = findViewById(R.id.dailyLight);
         weeklyLight = findViewById(R.id.weeklyLight);
         monthlyLight = findViewById(R.id.monthlyLight);
@@ -138,13 +129,8 @@ public class SetDue extends MainActivity {
             dateTextView.setText(R.string.addDate);
             timeTextView.setText(R.string.addTime);
 
-            if(lightDark){
                 calendarFadedLight.setVisibility(View.VISIBLE);
                 timeFadedLight.setVisibility(View.VISIBLE);
-            }else{
-                calendarFadedDark.setVisibility(View.VISIBLE);
-                timeFadedDark.setVisibility(View.VISIBLE);
-            }
 
         //Showing existing due date and time
         }else{
@@ -230,13 +216,10 @@ public class SetDue extends MainActivity {
 
             calendar.setVisibility(View.VISIBLE);
             time.setVisibility(View.VISIBLE);
-            if(lightDark){
+
                 calendarFadedLight.setVisibility(View.GONE);
                 timeFadedLight.setVisibility(View.GONE);
-            }else{
-                calendarFadedDark.setVisibility(View.GONE);
-                timeFadedDark.setVisibility(View.GONE);
-            }
+
             datePicked = true;
             timePicked = true;
             if(screenSize == 3){
@@ -252,23 +235,10 @@ public class SetDue extends MainActivity {
 
         }
 
-        if(!lightDark){
-            dueToolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
-            dueToolbar.setSubtitleTextColor(Color.parseColor("#AAAAAA"));
-            pickerRoot.setBackgroundColor(Color.parseColor("#333333"));
-            dueToolbar.setBackgroundColor(Color.parseColor("#333333"));
-            dateTextView.setTextColor(Color.parseColor("#AAAAAA"));
-            timeTextView.setTextColor(Color.parseColor("#AAAAAA"));
-            cancelRepeatDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-            dailyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-            weeklyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-            monthlyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-            darkRepeat.setVisibility(View.VISIBLE);
-        }else{
-            dueToolbar.setTitleTextColor(Color.parseColor("#000000"));
+//            dueToolbar.setTitleTextColor(Color.parseColor("#000000"));
             dueToolbar.setSubtitleTextColor(Color.parseColor("#666666"));
-            pickerRoot.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            dueToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            pickerRoot.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            dueToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             dateTextView.setTextColor(Color.parseColor("#000000"));
             timeTextView.setTextColor(Color.parseColor("#000000"));
             cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
@@ -276,20 +246,15 @@ public class SetDue extends MainActivity {
             weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
             monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
             lightRepeat.setVisibility(View.VISIBLE);
-        }
 
         //Highlight the repeat type or highlight No Repeat if none exists
         if(!dbRepeat){
-            cancelRepeatDark.setBackgroundColor(Color.parseColor(highlight));
             cancelRepeatLight.setBackgroundColor(Color.parseColor(highlight));
         }else if(dbRepeatInterval.equals("day")){
-            dailyDark.setBackgroundColor(Color.parseColor(highlight));
             dailyLight.setBackgroundColor(Color.parseColor(highlight));
         }else if(dbRepeatInterval.equals("week")){
-            weeklyDark.setBackgroundColor(Color.parseColor(highlight));
             weeklyLight.setBackgroundColor(Color.parseColor(highlight));
         }else if(dbRepeatInterval.equals("month")){
-            monthlyDark.setBackgroundColor(Color.parseColor(highlight));
             monthlyLight.setBackgroundColor(Color.parseColor(highlight));
         }
 
@@ -325,41 +290,7 @@ public class SetDue extends MainActivity {
 
         });
 
-        //Actions to occur if user selects to set a daily recurring alarm
-        dailyDark.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if(!mute && !repeat.equals("day")){
-                    blip.start();
-                }
-
-
-                vibrate.vibrate(50);
-
-                //Show user which button they selected by highlighting it
-                cancelRepeatDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                dailyDark.setBackgroundColor(Color.parseColor(highlight));
-                weeklyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                monthlyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-
-                repeatInterval = AlarmManager.INTERVAL_DAY;//TODO might not need this variable any more
-                db.updateRepeatIntervalTemp(String.valueOf(AlarmManager.INTERVAL_DAY));
-
-                repeat = "day";
-
-                repeating = true;
-
-                setDue = true;
-
-                killAlarm.setVisible(true);
-
-            }
-
-        });
-
-        //Actions to occur if user selects to set a daily recurring alarm
+                //Actions to occur if user selects to set a daily recurring alarm
         dailyLight.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -381,38 +312,6 @@ public class SetDue extends MainActivity {
                 db.updateRepeatIntervalTemp(String.valueOf(AlarmManager.INTERVAL_DAY));
 
                 repeat = "day";
-
-                repeating =true;
-
-                setDue = true;
-
-                killAlarm.setVisible(true);
-
-            }
-
-        });
-
-        //Actions to occur if user selects to set a weekly recurring alarm
-        weeklyDark.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if(!mute && !repeat.equals("week")){
-                    blip.start();
-                }
-
-                vibrate.vibrate(50);
-
-                //Show user which button they selected by highlighting it
-                cancelRepeatDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                dailyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                weeklyDark.setBackgroundColor(Color.parseColor(highlight));
-                monthlyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-
-                repeatInterval = AlarmManager.INTERVAL_DAY * 7;
-
-                repeat = "week";
 
                 repeating =true;
 
@@ -457,36 +356,6 @@ public class SetDue extends MainActivity {
         });
 
         //Actions to occur if user selects to set a monthly  recurring alarm
-        monthlyDark.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if(!mute && !repeat.equals("month")){
-                    blip.start();
-                }
-
-                vibrate.vibrate(50);
-
-                //Show user which button they selected by highlighting it
-                cancelRepeatDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                dailyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                weeklyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                monthlyDark.setBackgroundColor(Color.parseColor(highlight));
-
-                repeat = "month";
-
-                repeating =true;
-
-                setDue = true;
-
-                killAlarm.setVisible(true);
-
-            }
-
-        });
-
-        //Actions to occur if user selects to set a monthly  recurring alarm
         monthlyLight.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -511,40 +380,6 @@ public class SetDue extends MainActivity {
                 setDue = true;
 
                 killAlarm.setVisible(true);
-
-            }
-
-        });
-
-        //Actions to occur when user chooses to cancel the repeat
-        cancelRepeatDark.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if(!mute && !repeat.equals("none")){
-                    blip.start();
-                }
-
-                vibrate.vibrate(50);
-
-                cancelRepeatDark.setBackgroundColor(Color.parseColor(highlight));
-                dailyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                weeklyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-                monthlyDark.setBackgroundColor(Color.parseColor("#AAAAAA"));
-
-                repeat = "none";
-
-                setDue = false;
-
-                if(!timePicked && !datePicked) {
-
-                    killAlarm.setVisible(false);
-
-                }
-
-                db.updateRepeatInterval(dbTaskId, "");
-                db.updateRepeat(dbTaskId, false);
 
             }
 
@@ -687,13 +522,9 @@ public class SetDue extends MainActivity {
 
                                     time.setVisibility(View.GONE);
                                     calendar.setVisibility(View.GONE);
-                                    if(lightDark){
+
                                         calendarFadedLight.setVisibility(View.VISIBLE);
                                         timeFadedLight.setVisibility(View.VISIBLE);
-                                    }else{
-                                        calendarFadedDark.setVisibility(View.VISIBLE);
-                                        timeFadedDark.setVisibility(View.VISIBLE);
-                                    }
 
                                     dateTextView.setText(R.string.addDate);
                                     timeTextView.setText(R.string.addTime);
@@ -708,16 +539,6 @@ public class SetDue extends MainActivity {
                                         timeTextView.setTextSize(15);
                                     }
 
-                                    if(!lightDark) {
-                                        cancelRepeatDark.setBackgroundColor
-                                                (Color.parseColor(highlight));
-                                        dailyDark.setBackgroundColor
-                                                (Color.parseColor("#AAAAAA"));
-                                        weeklyDark.setBackgroundColor
-                                                (Color.parseColor("#AAAAAA"));
-                                        monthlyDark.setBackgroundColor
-                                                (Color.parseColor("#AAAAAA"));
-                                    }else{
                                         cancelRepeatLight.setBackgroundColor
                                                 (Color.parseColor(highlight));
                                         dailyLight.setBackgroundColor
@@ -726,7 +547,6 @@ public class SetDue extends MainActivity {
                                                 (Color.parseColor("#000000"));
                                         monthlyLight.setBackgroundColor
                                                 (Color.parseColor("#000000"));
-                                    }
 
                                 }
                             };
@@ -802,13 +622,8 @@ public class SetDue extends MainActivity {
             DatePickerDialog datePickerDialog;
 
             //Initialise date picker based on light or dark mode
-            if(!lightDark) {
-                datePickerDialog = new DatePickerDialog(getActivity(),
-                        AlertDialog.THEME_DEVICE_DEFAULT_DARK, this, year, month, day);
-            }else{
                 datePickerDialog = new DatePickerDialog(getActivity(),
                         AlertDialog.THEME_DEVICE_DEFAULT_LIGHT, this, year, month, day);
-            }
 
             //Make so all previous dates are inactive.
             // User shouldn't be able to set due date to in the past
@@ -937,11 +752,9 @@ public class SetDue extends MainActivity {
 
             setDue = true;
             datePicked = true;
-            if(lightDark){
+
                 calendarFadedLight.setVisibility(View.GONE);
-            }else{
-                calendarFadedDark.setVisibility(View.GONE);
-            }
+
             calendar.setVisibility(View.VISIBLE);
 
             if(screenSize == 3){
@@ -1026,18 +839,7 @@ public class SetDue extends MainActivity {
             TimePickerDialog timePickerDialog;
 
             //Initialising time picker based on light or dark
-            if(!lightDark) {
-                if(getResources().getConfiguration().orientation
-                        == Configuration.ORIENTATION_LANDSCAPE) {
-                    timePickerDialog = new TimePickerDialog(this.getActivity(),
-                            AlertDialog.THEME_HOLO_DARK, this,
-                            defaultTimePickerHour, minute, false);
-                }else{
-                    timePickerDialog = new TimePickerDialog(this.getActivity(),
-                            AlertDialog.THEME_DEVICE_DEFAULT_DARK, this,
-                            defaultTimePickerHour, minute, false);
-                }
-            }else{
+
                 if(getResources().getConfiguration().orientation
                         == Configuration.ORIENTATION_LANDSCAPE) {
                     timePickerDialog = new TimePickerDialog(this.getActivity(),
@@ -1048,7 +850,6 @@ public class SetDue extends MainActivity {
                             AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,
                             this, defaultTimePickerHour, minute, false);
                 }
-            }
 
             return timePickerDialog;
 
@@ -1136,11 +937,8 @@ public class SetDue extends MainActivity {
 
             setDue = true;
             timePicked = true;
-            if(lightDark) {
                 timeFadedLight.setVisibility(View.GONE);
-            }else{
-                timeFadedDark.setVisibility(View.GONE);
-            }
+
             time.setVisibility(View.VISIBLE);
 
             int screenSize = getResources().getConfiguration().screenLayout &

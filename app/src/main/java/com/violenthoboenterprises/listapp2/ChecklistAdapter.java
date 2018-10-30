@@ -31,10 +31,6 @@ class ChecklistAdapter extends ArrayAdapter<String> {
         final View checklistItemView = theInflater.inflate
                 (R.layout.checklist_item, parent, false);
         TextView checklistTextView = checklistItemView.findViewById(R.id.checklistTextView);
-        final ImageView tick = checklistItemView.findViewById(R.id.subtaskComplete);
-        final ImageView ticked = checklistItemView.findViewById(R.id.subtaskCompleted);
-        final ImageView tickFaded = checklistItemView.findViewById(R.id.subtaskCompleteFaded);
-        final ImageView tickedFaded = checklistItemView.findViewById(R.id.subtaskCompletedFaded);
         final ImageView tickWhite = checklistItemView.findViewById(R.id.subtaskCompleteWhite);
         final ImageView tickedWhite = checklistItemView.findViewById(R.id.subtaskCompletedWhite);
         final ImageView tickWhiteFaded = checklistItemView
@@ -54,47 +50,16 @@ class ChecklistAdapter extends ArrayAdapter<String> {
         final String finalDbTaskId = dbTaskId;
 
         //setting up UI based on light or dark mode
-        if(!MainActivity.lightDark){
-            checklistItemView.setBackgroundColor(Color.parseColor("#333333"));
-            if(Checklist.fadeSubTasks){
-                checklistTextView.setTextColor(Color.parseColor("#666666"));
-                tickFaded.setVisibility(View.VISIBLE);
-                tickWhiteFaded.setVisibility(View.GONE);
-                tick.setVisibility(View.GONE);
-                tickWhite.setVisibility(View.GONE);
-            }else {
-                tickFaded.setVisibility(View.GONE);
-                tickWhiteFaded.setVisibility(View.GONE);
-                tick.setVisibility(View.VISIBLE);
-                tickWhite.setVisibility(View.GONE);
-            }
-        }else{
-            checklistItemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            checklistItemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             checklistTextView.setTextColor(Color.parseColor("#000000"));
             if(Checklist.fadeSubTasks){
                 checklistTextView.setTextColor(Color.parseColor("#DDDDDD"));
-                tickFaded.setVisibility(View.GONE);
-                tick.setVisibility(View.GONE);
                 tickWhite.setVisibility(View.GONE);
                 tickWhiteFaded.setVisibility(View.VISIBLE);
             }else {
-                tickFaded.setVisibility(View.GONE);
                 tickWhiteFaded.setVisibility(View.GONE);
-                tick.setVisibility(View.GONE);
                 tickWhite.setVisibility(View.VISIBLE);
             }
-        }
-
-        //registering that subtask should be marked as done
-        tick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                markAsDone(position, finalDbTaskId);
-
-            }
-
-        });
 
         //registering that subtask should be marked as done
         tickWhite.setOnClickListener(new View.OnClickListener() {
@@ -125,17 +90,7 @@ class ChecklistAdapter extends ArrayAdapter<String> {
             checklistTextView.setPaintFlags(checklistTextView.getPaintFlags() |
                     Paint.STRIKE_THRU_TEXT_FLAG);
 
-            if(!MainActivity.lightDark){
-                checklistItemView.setBackgroundColor(Color.parseColor("#333333"));
-                if(Checklist.fadeSubTasks){
-                    tickedFaded.setVisibility(View.VISIBLE);
-                    tickFaded.setVisibility(View.GONE);
-                }else {
-                    ticked.setVisibility(View.VISIBLE);
-                    tick.setVisibility(View.GONE);
-                }
-            }else{
-                checklistItemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//                checklistItemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 if(Checklist.fadeSubTasks){
                     tickWhiteFaded.setVisibility(View.GONE);
                     tickedWhiteFaded.setVisibility(View.VISIBLE);
@@ -143,7 +98,6 @@ class ChecklistAdapter extends ArrayAdapter<String> {
                     tickWhite.setVisibility(View.GONE);
                     tickedWhite.setVisibility(View.VISIBLE);
                 }
-            }
 
         }
 

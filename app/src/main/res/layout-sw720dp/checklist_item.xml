@@ -20,48 +20,6 @@
         android:focusableInTouchMode="false"/>
 
     <ImageView
-        android:id="@+id/subtaskComplete"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/tick"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="complete"
-        android:contentDescription="@string/accessEmptyCheckbox"/>
-
-    <ImageView
-        android:id="@+id/subtaskCompleted"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/tick_complete"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone"
-        android:contentDescription="@string/accessCheckboxTick"/>
-
-    <ImageView
-        android:id="@+id/subtaskCompleteFaded"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/tick_faded"
-        android:focusable="true"
-        android:visibility="gone"
-        android:contentDescription="@string/accessEmptyCheckbox"/>
-
-    <ImageView
-        android:id="@+id/subtaskCompletedFaded"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/tick_complete_faded"
-        android:focusable="true"
-        android:visibility="gone"
-        android:contentDescription="@string/accessCheckboxTick"/>
-
-    <ImageView
         android:id="@+id/subtaskCompleteWhite"
         android:layout_width="50dp"
         android:layout_height="50dp"

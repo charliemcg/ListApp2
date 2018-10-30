@@ -116,13 +116,9 @@ public class AlertReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        if(MainActivity.lightDark) {
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification_light);
             remoteViews.setTextViewText(R.id.notif_title, dbTask);
-        }else{
-            remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification);
-            remoteViews.setTextViewText(R.id.notif_title, dbTask);
-        }
+
 
         //Setting up notification channel for Oreo
         final String notificChannelId = "notification_channel";

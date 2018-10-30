@@ -53,31 +53,6 @@
                 android:textColor="@color/gray"/>
 
             <ImageView
-                android:id="@+id/complete"
-                android:layout_height="50dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:src="@drawable/tick"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="complete"
-                android:soundEffectsEnabled="false"/>
-
-            <ImageView
-                android:id="@+id/completed"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_margin="8dp"
-                android:src="@drawable/tick_complete"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="complete"
-                android:visibility="gone"
-                android:soundEffectsEnabled="false"/>
-
-            <ImageView
                 android:id="@+id/completeWhite"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -128,13 +103,6 @@
                 android:layout_marginRight="5dp">
 
                 <ImageView
-                    android:id="@+id/checklistClear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@color/mid_gray"
-                    android:src="@drawable/subtasks_icon_dark"/>
-
-                <ImageView
                     android:id="@+id/checklistClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -150,13 +118,6 @@
                 android:layout_height="25dp"
                 android:gravity="center"
                 android:layout_marginRight="5dp">
-
-                <ImageView
-                    android:id="@+id/noteClear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@color/mid_gray"
-                    android:src="@drawable/note_icon_dark"/>
 
                 <ImageView
                     android:id="@+id/noteClearWhite"
@@ -176,13 +137,6 @@
                 android:layout_marginRight="5dp">
 
                 <ImageView
-                    android:id="@+id/repeatClear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@color/mid_gray"
-                    android:src="@drawable/repeat_icon_dark"/>
-
-                <ImageView
                     android:id="@+id/repeatClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -198,13 +152,6 @@
                 android:layout_height="25dp"
                 android:gravity="center"
                 android:layout_marginRight="5dp">
-
-                <ImageView
-                    android:id="@+id/dueClear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/due_icon_dark"
-                    android:background="@color/mid_gray"/>
 
                 <ImageView
                     android:id="@+id/dueClearWhite"
@@ -225,13 +172,6 @@
                 android:layout_marginRight="5dp">
 
                 <ImageView
-                    android:id="@+id/overdueClear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@color/mid_gray"
-                    android:src="@drawable/overdue_icon_dark"/>
-
-                <ImageView
                     android:id="@+id/overdueClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -248,13 +188,6 @@
                 android:gravity="center"
                 android:visibility="gone"
                 android:layout_marginRight="5dp">
-
-                <ImageView
-                    android:id="@+id/snoozeClear"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@color/mid_gray"
-                    android:src="@drawable/snooze_icon_dark"/>
 
                 <ImageView
                     android:id="@+id/snoozeClearWhite"
