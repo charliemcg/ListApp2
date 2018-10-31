@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.util.Calendar;
@@ -118,12 +119,11 @@ public class AlertReceiver extends BroadcastReceiver {
 
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification_light);
             remoteViews.setTextViewText(R.id.notif_title, dbTask);
-            //showing motivational toast
-            int j = MainActivity.random.nextInt(5);
+            //randomly generating motivational toast
+            int j = MainActivity.random.nextInt(7);
             while (MainActivity.motivation[j].equals(MainActivity.lastToast)) {
-                j = MainActivity.random.nextInt(5);
+                j = MainActivity.random.nextInt(7);
             }
-            remoteViews.setTextViewText(R.id.notif_affirmation, /*MainActivity.motivation[j])*/"test");
 
         //Setting up notification channel for Oreo
         final String notificChannelId = "notification_channel";
@@ -143,7 +143,7 @@ public class AlertReceiver extends BroadcastReceiver {
         builder = new NotificationCompat.Builder(context, notificChannelId)
                 .setSmallIcon(R.drawable.small_notific_icon).setLargeIcon(BitmapFactory
                         .decodeResource(context.getResources(), R.drawable.ic_launcher_og))
-                .setContentTitle(context.getString(R.string.killThisTask)).setTicker(msgAlert)
+                .setContentTitle(MainActivity.motivation[j]).setTicker(msgAlert)
                 .setWhen(0).setContentText(dbTask).setStyle(new NotificationCompat.BigTextStyle())
                 .setColorized(true).setColor(Color.parseColor(highlight))
                 .setCustomContentView(remoteViews).setLights(Integer.parseInt

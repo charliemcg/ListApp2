@@ -399,7 +399,7 @@ public class MainActivity extends AppCompatActivity implements
         motivation = new String[]{getString(R.string.getItDone),
                 getString(R.string.smashThatTask), getString(R.string.beAWinner),
                 getString(R.string.onlyWimpsGiveUp), getString(R.string.dontBeAFailure),
-                getString(R.string.beVictorious)};
+                getString(R.string.beVictorious), getString(R.string.killThisTask)};
         killedAffirmation = new String[]{getString(R.string.youKilledThisTask),
                 getString(R.string.neverGiveUp), getString(R.string.youreAnInspiration),
                 getString(R.string.accomplishmentsMakeYouStronger),
@@ -813,9 +813,9 @@ public class MainActivity extends AppCompatActivity implements
                             }else{
                                 if (showMotivation) {
                                     //showing motivational toast
-                                    int i = random.nextInt(6);
+                                    int i = random.nextInt(7);
                                     while (motivation[i].equals(lastToast)) {
-                                        i = random.nextInt(6);
+                                        i = random.nextInt(7);
                                     }
                                     lastToast = motivation[i];
                                     toast.setText(motivation[i]);
@@ -852,9 +852,9 @@ public class MainActivity extends AppCompatActivity implements
                         }else{
                             if (showMotivation) {
                                 //showing motivational toast
-                                int i = random.nextInt(6);
+                                int i = random.nextInt(7);
                                 while (motivation[i].equals(lastToast)) {
-                                    i = random.nextInt(6);
+                                    i = random.nextInt(7);
                                 }
                                 lastToast = motivation[i];
                                 toast.setText(motivation[i]);
