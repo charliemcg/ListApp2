@@ -189,6 +189,7 @@ class MyAdapter extends ArrayAdapter<String> {
         //getting task data
         int dbID = 0;
         String dbNote = "";
+        boolean dbChecklist = false;
         String dbTimestamp = "";
         Boolean dbDue = false;
         Boolean dbKilled = false;
@@ -205,6 +206,7 @@ class MyAdapter extends ArrayAdapter<String> {
         while (dbResult.moveToNext()) {
             dbID = dbResult.getInt(0);
             dbNote = dbResult.getString(1);
+            dbChecklist = dbResult.getInt(2) > 0;
             dbTimestamp = dbResult.getString(3);
             dbDue = dbResult.getInt(5) > 0;
             dbKilled = dbResult.getInt(6) > 0;
@@ -299,10 +301,10 @@ class MyAdapter extends ArrayAdapter<String> {
             snoozeTaskBtnText.setTextColor(Color.parseColor("#000000"));
             taskDoneBtnText.setTextColor(Color.parseColor("#000000"));
             taskIgnoreBtnText.setTextColor(Color.parseColor("#000000"));
-            checklistClearWhite.setVisibility(View.VISIBLE);
-            noteClearWhite.setVisibility(View.VISIBLE);
-            repeatClearWhite.setVisibility(View.VISIBLE);
-            dueClearWhite.setVisibility(View.VISIBLE);
+//            checklistClearWhite.setVisibility(View.VISIBLE);
+//            noteClearWhite.setVisibility(View.VISIBLE);
+//            repeatClearWhite.setVisibility(View.VISIBLE);
+//            dueClearWhite.setVisibility(View.VISIBLE);
             overdueClearWhite.setVisibility(View.VISIBLE);
             snoozeClearWhite.setVisibility(View.VISIBLE);
             completeWhite.setVisibility(View.VISIBLE);
@@ -422,6 +424,10 @@ class MyAdapter extends ArrayAdapter<String> {
                 });
 
             }
+        }
+
+        if(dbDue || !dbNote.equals("") || dbChecklist){
+            statusLayout.setVisibility(View.VISIBLE);
         }
 
         //Task cannot be centered unless it's in view. Moving selected task into view
@@ -980,8 +986,9 @@ class MyAdapter extends ArrayAdapter<String> {
                 //Not overdue
                 } else {
                     if(!dbKilled) {
-                        dueClearWhite.setBackgroundColor(Color.parseColor
-                                (MainActivity.highlight));
+//                        dueClearWhite.setBackgroundColor(Color.parseColor
+//                                (MainActivity.highlight));
+                        dueClearWhite.setVisibility(View.VISIBLE);
                     }else{
                             dueClearWhite.setBackgroundColor(ContextCompat
                                     .getColor(getContext(), R.color.black));
@@ -4168,7 +4175,8 @@ class MyAdapter extends ArrayAdapter<String> {
 
         //show repeat icon if required
         if(dbRepeat && !dbKilled){
-            repeatClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+//            repeatClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+            repeatClearWhite.setVisibility(View.VISIBLE);
         }else{
             repeatClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
@@ -4176,17 +4184,19 @@ class MyAdapter extends ArrayAdapter<String> {
         //Show checklist/note icon if required
         if(dbChecklistSize != 0){
             if(!dbKilled) {
-                checklistClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+//                checklistClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+                checklistClearWhite.setVisibility(View.VISIBLE);
             }else{
-                checklistClearWhite.setBackgroundColor(ContextCompat
-                        .getColor(getContext(), R.color.black));
+//                checklistClearWhite.setBackgroundColor(ContextCompat
+//                        .getColor(getContext(), R.color.black));
             }
         }else{
-            checklistClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
+//            checklistClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
         if(!dbNote.equals("")){
             if(!dbKilled) {
-                noteClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+//                noteClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+                noteClearWhite.setVisibility(View.VISIBLE);
             }else{
                 noteClearWhite.setBackgroundColor(ContextCompat
                         .getColor(getContext(), R.color.black));

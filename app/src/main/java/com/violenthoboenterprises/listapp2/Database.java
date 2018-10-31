@@ -251,7 +251,7 @@ public class Database extends SQLiteOpenHelper {
         content.put(UCOL27, false);
         content.put(UCOL28, false);
         content.put(UCOL29, false);
-        content.put(UCOL30, "-298516736");
+        content.put(UCOL30, "-285270841");
         content.put(UCOL31, "0");
         content.put(UCOL32, "");
         content.put(UCOL33, false);

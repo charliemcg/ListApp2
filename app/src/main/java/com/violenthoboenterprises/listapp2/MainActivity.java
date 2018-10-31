@@ -1042,6 +1042,7 @@ public class MainActivity extends AppCompatActivity implements
 //                    .density(10).noSliders().setOnColorSelectedListener(new OnColorSelectedListener() {
 //                @Override
 //                public void onColorSelected(int selectedColor) {
+//                    Log.i(TAG, "SelectedColor: " + selectedColor);
 //                    String tempHighlight = "#" + Integer.toHexString(selectedColor);
 //                    toolbarLight.setTitleTextColor(Color.parseColor(tempHighlight));
 //                    addIcon.setTextColor(Color.parseColor(tempHighlight));
