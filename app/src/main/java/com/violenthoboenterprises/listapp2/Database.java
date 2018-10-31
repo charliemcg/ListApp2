@@ -224,12 +224,12 @@ public class Database extends SQLiteOpenHelper {
         Calendar calendar = Calendar.getInstance();
         content.put(UCOL1, 0);
         content.put(UCOL2, mute);
-        content.put(UCOL3, "#FF00FF00");
+        content.put(UCOL3, "#FFF152C9");
         content.put(UCOL4, false);
         content.put(UCOL5, "");
-        content.put(UCOL6, false);//TODO change back to false!!!
-        content.put(UCOL7, false);//TODO change back to false!!!
-        content.put(UCOL8, false);//TODO change back to false!!!
+        content.put(UCOL6, true);//TODO change back to false!!!
+        content.put(UCOL7, true);//TODO change back to false!!!
+        content.put(UCOL8, true);//TODO change back to false!!!
         content.put(UCOL9, 0);
         content.put(UCOL10, 0);
         content.put(UCOL11, false);

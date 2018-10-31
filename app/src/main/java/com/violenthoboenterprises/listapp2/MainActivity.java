@@ -184,22 +184,14 @@ public class MainActivity extends AppCompatActivity implements
     public static ArrayList<String> sortedIdsForNote;
 
     //Toasts which show up when adding new task
-    String[] motivation;
+    static String[] motivation;
     //Keep track of last phrase used so as to not have the same thing twice in a row
-    String lastToast;
+    static String lastToast;
+    //Toasts which show up when completing task
+    static String[] killedAffirmation;
+    //Keep track of last phrase used so as to not have the same thing twice in a row
+    static String lastKilledToast;
     //Colors for the auto color change feature
-    String[] darkHighlightsDec = {"-301927437", "-301943809", "-301924429", "-301924506",
-            "-301924582", "-288489728", "-286271744", "-285764608", "-285783552", "-290783233",
-            "-298520705", "-279253196", "-276435040", "-272895810", "-293081265", "-270012593",
-            "-285806940", "-285890251", "-285614910", "-285688950", "-285760348", "-285854154",
-            "-285825859", "-285912726", "-285891627", "-286226187", "-290216971", "-278092811",
-            "-274467388", "-292883375", "-275909497", "-272894895"};
-    String[] darkHighlights = {"#ee00f3f3", "#ee00b3ff", "#ee00ffb3", "#ee00ff66", "#ee00ff1a",
-            "#eecdff00", "#eeefd700", "#eef79400", "#eef74a00", "#eeaaffff", "#ee34ef7f",
-            "#ef5aef34", "#ef85efa0", "#efbbf0be", "#ee87ef4f", "#efe7ef4f", "#eef6eea4",
-            "#eef5a935", "#eef9dcc2", "#eef8bb8a", "#eef7a4a4", "#eef63636", "#eef6a4bd",
-            "#eef5516a", "#eef5a3d5", "#eef088f5", "#eeb3a3f5", "#ef6ca3f5", "#efa3f5c4",
-            "#ee8af451", "#ef8df487", "#efbbf451"};
     String[] lightHighlightsDec = {"-301983240", "-285186049", "-285169681", "-296373249",
             "-278169102", "-279926286", "-277085960", "-288620289", "-285277978", "-285278054",
             "-286326712", "-286326784", "-286308352", "-286290176", "-285263636", "-286320006",
@@ -272,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements
     static Database db;
 
     //for generating random number to select toast phrases
-    Random random = new Random();
+    static Random random = new Random();
 
     //The user selectable highlight color
     static String highlight;
@@ -334,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.dark_gray));
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.turquoise));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -368,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         db = new Database(this);
         lastToast = "";
+        lastKilledToast = "";
         inNote = false;
         inChecklist = false;
         taskOptionsShowing = false;
@@ -407,6 +400,10 @@ public class MainActivity extends AppCompatActivity implements
                 getString(R.string.smashThatTask), getString(R.string.beAWinner),
                 getString(R.string.onlyWimpsGiveUp), getString(R.string.dontBeAFailure),
                 getString(R.string.beVictorious)};
+        killedAffirmation = new String[]{getString(R.string.youKilledThisTask),
+                getString(R.string.neverGiveUp), getString(R.string.youreAnInspiration),
+                getString(R.string.accomplishmentsMakeYouStronger),
+                getString(R.string.yourePositivityPaysOff)};
         exitTaskProperties = false;
         snoozeRowShowing = false;
         toast = findViewById(R.id.toast);
@@ -464,7 +461,7 @@ public class MainActivity extends AppCompatActivity implements
         //Put data in list
         theListView.setAdapter(theAdapter[0]);
 
-        toolbarLight.setTitleTextColor(Color.parseColor(highlight));
+//        toolbarLight.setTitleTextColor(Color.parseColor(highlight));
 
         addIcon.setTextColor(Color.parseColor(highlight));
         taskNameEditText.setBackgroundColor(Color.parseColor(highlight));
@@ -948,7 +945,7 @@ public class MainActivity extends AppCompatActivity implements
         db.updateColorLastChanged((int) (cal.getTimeInMillis() / 1000 / 60 / 60));
         highlightDec = lightHighlightsDec[i];
         highlight = lightHighlights[i];
-        toolbarLight.setTitleTextColor(Color.parseColor(highlight));
+//        toolbarLight.setTitleTextColor(Color.parseColor(highlight));
         addIcon.setTextColor(Color.parseColor(highlight));
         taskNameEditText.setBackgroundColor(Color.parseColor(highlight));
         toast.setBackgroundColor(Color.parseColor(highlight));
@@ -983,9 +980,9 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         if(!menu.hasVisibleItems()) {
             getMenuInflater().inflate(R.menu.menu_main, menu);
-                customiseBtn = this.toolbarLight.getMenu().findItem(R.id.highlight);
+//                customiseBtn = this.toolbarLight.getMenu().findItem(R.id.highlight);
                 proBtn = this.toolbarLight.getMenu().findItem(R.id.buy);
-                autoColorBtn = this.toolbarLight.getMenu().findItem(R.id.autoColor);
+//                autoColorBtn = this.toolbarLight.getMenu().findItem(R.id.autoColor);
                 motivationBtn = this.toolbarLight.getMenu().findItem(R.id.motivation);
                 muteBtn = this.toolbarLight.getMenu().findItem(R.id.mute);
             if(showMotivation){
@@ -1034,49 +1031,49 @@ public class MainActivity extends AppCompatActivity implements
             return true;
 
         //Actions to occur if user selects 'color'
-        } else if (id == R.id.highlight) {
-
-            int colorPickerTheme = R.style.ColorPickerThemeLight;
-
-            ColorPickerDialogBuilder
-                    .with(MainActivity.this, colorPickerTheme).setTitle(getString(R.string.chooseColor))
-                    .initialColor(Integer.parseInt(highlightDec))
-                    .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
-                    .density(10).noSliders().setOnColorSelectedListener(new OnColorSelectedListener() {
-                @Override
-                public void onColorSelected(int selectedColor) {
-                    String tempHighlight = "#" + Integer.toHexString(selectedColor);
-                    toolbarLight.setTitleTextColor(Color.parseColor(tempHighlight));
-                    addIcon.setTextColor(Color.parseColor(tempHighlight));
-                    taskNameEditText.setBackgroundColor(Color.parseColor(tempHighlight));
-                }
-            }).setPositiveButton(getString(R.string.oK), new ColorPickerClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
-                    highlight = "#" + Integer.toHexString(selectedColor);
-                    highlightDec = String.valueOf(selectedColor);
-                    db.updateHighlight(highlight);
-                    db.updateHighlightDec(String.valueOf(selectedColor));
-
-                    toast.setBackgroundColor(Color.parseColor(highlight));
-                    int[] colors = {0, selectedColor, 0};
-                    theListView.setDivider(new GradientDrawable
-                            (GradientDrawable.Orientation.RIGHT_LEFT, colors));
-
-                        theListView.setDividerHeight(3);
-
-                    theListView.setAdapter(theAdapter[0]);
-                }
-            }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    toolbarLight.setTitleTextColor(Color.parseColor(highlight));
-                    addIcon.setTextColor(Color.parseColor(highlight));
-                    taskNameEditText.setBackgroundColor(Color.parseColor(highlight));
-                }
-            }).build().show();
-
-            return true;
+//        } else if (id == R.id.highlight) {
+//
+//            int colorPickerTheme = R.style.ColorPickerThemeLight;
+//
+//            ColorPickerDialogBuilder
+//                    .with(MainActivity.this, colorPickerTheme).setTitle(getString(R.string.chooseColor))
+//                    .initialColor(Integer.parseInt(highlightDec))
+//                    .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+//                    .density(10).noSliders().setOnColorSelectedListener(new OnColorSelectedListener() {
+//                @Override
+//                public void onColorSelected(int selectedColor) {
+//                    String tempHighlight = "#" + Integer.toHexString(selectedColor);
+//                    toolbarLight.setTitleTextColor(Color.parseColor(tempHighlight));
+//                    addIcon.setTextColor(Color.parseColor(tempHighlight));
+//                    taskNameEditText.setBackgroundColor(Color.parseColor(tempHighlight));
+//                }
+//            }).setPositiveButton(getString(R.string.oK), new ColorPickerClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+//                    highlight = "#" + Integer.toHexString(selectedColor);
+//                    highlightDec = String.valueOf(selectedColor);
+//                    db.updateHighlight(highlight);
+//                    db.updateHighlightDec(String.valueOf(selectedColor));
+//
+//                    toast.setBackgroundColor(Color.parseColor(highlight));
+//                    int[] colors = {R.color.turquoise, R.color.turquoise, R.color.turquoise};
+//                    theListView.setDivider(new GradientDrawable
+//                            (GradientDrawable.Orientation.RIGHT_LEFT, colors));
+////
+////                        theListView.setDividerHeight(3);
+//
+//                    theListView.setAdapter(theAdapter[0]);
+//                }
+//            }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    toolbarLight.setTitleTextColor(Color.parseColor(highlight));
+//                    addIcon.setTextColor(Color.parseColor(highlight));
+//                    taskNameEditText.setBackgroundColor(Color.parseColor(highlight));
+//                }
+//            }).build().show();
+//
+//            return true;
             //Actions to occur if user selects the pro icon
         } else if (id == R.id.buy) {
 
@@ -1104,43 +1101,43 @@ public class MainActivity extends AppCompatActivity implements
             return true;
 
             //Actions to occur if user selects 'cycle colors'
-        } else if (id == R.id.autoColor) {
-
-            if(colorCyclingAllowed){
-                if(colorCyclingEnabled){
-                    colorCyclingEnabled = false;
-                    item.setChecked(false);
-                    db.updateCycleEnabled(false);
-                }else{
-                    colorCyclingEnabled = true;
-                    item.setChecked(true);
-                    db.updateCycleEnabled(true);
-                }
-            }else{
-                purchasesShowing = true;
-                add.setClickable(false);
-                theListView.setOnItemClickListener(null);
-                taskPropertiesShowing = false;
-
-                    onCreateOptionsMenu(toolbarLight.getMenu());
-
-                theListView.setAdapter(theAdapter[0]);
-
-                purchases.startAnimation(AnimationUtils.loadAnimation
-                        (this, R.anim.enter_from_right));
-
-                final Handler handler = new Handler();
-
-                final Runnable runnable = new Runnable() {
-                    public void run() {
-                        purchases.setVisibility(View.VISIBLE);
-                    }
-                };
-
-                handler.postDelayed(runnable, 200);
-            }
-
-            return true;
+//        } else if (id == R.id.autoColor) {
+//
+//            if(colorCyclingAllowed){
+//                if(colorCyclingEnabled){
+//                    colorCyclingEnabled = false;
+//                    item.setChecked(false);
+//                    db.updateCycleEnabled(false);
+//                }else{
+//                    colorCyclingEnabled = true;
+//                    item.setChecked(true);
+//                    db.updateCycleEnabled(true);
+//                }
+//            }else{
+//                purchasesShowing = true;
+//                add.setClickable(false);
+//                theListView.setOnItemClickListener(null);
+//                taskPropertiesShowing = false;
+//
+//                    onCreateOptionsMenu(toolbarLight.getMenu());
+//
+//                theListView.setAdapter(theAdapter[0]);
+//
+//                purchases.startAnimation(AnimationUtils.loadAnimation
+//                        (this, R.anim.enter_from_right));
+//
+//                final Handler handler = new Handler();
+//
+//                final Runnable runnable = new Runnable() {
+//                    public void run() {
+//                        purchases.setVisibility(View.VISIBLE);
+//                    }
+//                };
+//
+//                handler.postDelayed(runnable, 200);
+//            }
+//
+//            return true;
 
         }
         //Actions to occur if user selects 'motivation'
@@ -2137,6 +2134,10 @@ public class MainActivity extends AppCompatActivity implements
 
         //Setting the position for the toast
         toastParams.setMargins(15, (int) (deviceheight / 1.35), 0, 0);
+
+        int[] colors = {R.color.turquoise, R.color.turquoise, R.color.turquoise};
+        theListView.setDivider(new GradientDrawable
+                (GradientDrawable.Orientation.RIGHT_LEFT, colors));
 
     }
 

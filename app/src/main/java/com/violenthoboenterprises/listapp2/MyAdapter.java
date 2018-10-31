@@ -392,9 +392,9 @@ class MyAdapter extends ArrayAdapter<String> {
                 ConnectivityManager connectivityManager = (ConnectivityManager)
                         getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-                if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
-                    networkAvailable = true;
-                }
+//                if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+//                    networkAvailable = true;
+//                }
 
                 //Initialising banner ad
                 final AdView adView = taskView.findViewById(R.id.adView);
@@ -403,8 +403,8 @@ class MyAdapter extends ArrayAdapter<String> {
                 if (networkAvailable) {
                     adView.setVisibility(View.VISIBLE);
                     final AdRequest banRequest = new AdRequest.Builder()/*.build();*/
-                            //TODO probably need a new ID
-                            //TODO find out if id should go into strings.xml
+//                            TODO probably need a new ID
+//                            TODO find out if id should go into strings.xml
                             /*.addTestDevice("7A57C74D0EDE338C302869CB538CD3AC")*/.addTestDevice
                     (AdRequest.DEVICE_ID_EMULATOR).build();//TODO remove .addTestDevice()
                     adView.loadAd(banRequest);
@@ -1198,8 +1198,14 @@ class MyAdapter extends ArrayAdapter<String> {
 
                         handler.postDelayed(runnable, 500);
                     }else{
-                        if(MainActivity.showMotivation) {
-                            MainActivity.toast.setText(R.string.youKilledThisTask);
+                        if (MainActivity.showMotivation) {
+                            //showing motivational toast
+                            int i = MainActivity.random.nextInt(5);
+                            while (MainActivity.killedAffirmation[i].equals(MainActivity.lastKilledToast)) {
+                                i = MainActivity.random.nextInt(5);
+                            }
+                            MainActivity.lastKilledToast = MainActivity.killedAffirmation[i];
+                            MainActivity.toast.setText(MainActivity.killedAffirmation[i]);
                             final Handler handler = new Handler();
 
                             final Runnable runnable = new Runnable() {
@@ -1207,16 +1213,16 @@ class MyAdapter extends ArrayAdapter<String> {
                                     if (!MainActivity.mute) {
                                         MainActivity.sweep.start();
                                     }
-                                    MainActivity.toastView.startAnimation
-                                            (AnimationUtils.loadAnimation
+                                    MainActivity.toastView.startAnimation(AnimationUtils.loadAnimation
                                             (getContext(), R.anim.enter_from_right_fast));
                                     MainActivity.toastView.setVisibility(View.VISIBLE);
                                     final Handler handler2 = new Handler();
                                     final Runnable runnable2 = new Runnable() {
                                         public void run() {
-                                            MainActivity.toastView.startAnimation(AnimationUtils
-                                                    .loadAnimation(getContext(),
-                                                            android.R.anim.fade_out));
+                                            MainActivity.toastView.startAnimation(
+                                                    AnimationUtils.loadAnimation
+                                                            (getContext(),
+                                                                    android.R.anim.fade_out));
                                             MainActivity.toastView.setVisibility(View.GONE);
                                         }
                                     };
@@ -1230,14 +1236,18 @@ class MyAdapter extends ArrayAdapter<String> {
                     MainActivity.reinstateHint++;
                     MainActivity.db.updateReinstateHint(MainActivity.reinstateHint);
                 }else{
-                    if(MainActivity.showMotivation) {
-                        MainActivity.blockSoundAndAnimate = true;
-                        MainActivity.toast.setText(R.string.youKilledThisTask);
+                    if (MainActivity.showMotivation) {
+                        //showing motivational toast
+                        int i = MainActivity.random.nextInt(5);
+                        while (MainActivity.killedAffirmation[i].equals(MainActivity.lastKilledToast)) {
+                            i = MainActivity.random.nextInt(5);
+                        }
+                        MainActivity.lastKilledToast = MainActivity.killedAffirmation[i];
+                        MainActivity.toast.setText(MainActivity.killedAffirmation[i]);
                         final Handler handler = new Handler();
 
                         final Runnable runnable = new Runnable() {
                             public void run() {
-                                MainActivity.blockSoundAndAnimate = false;
                                 if (!MainActivity.mute) {
                                     MainActivity.sweep.start();
                                 }
@@ -1247,9 +1257,10 @@ class MyAdapter extends ArrayAdapter<String> {
                                 final Handler handler2 = new Handler();
                                 final Runnable runnable2 = new Runnable() {
                                     public void run() {
-                                        MainActivity.toastView.startAnimation(AnimationUtils
-                                                .loadAnimation(getContext(),
-                                                        android.R.anim.fade_out));
+                                        MainActivity.toastView.startAnimation(
+                                                AnimationUtils.loadAnimation
+                                                        (getContext(),
+                                                                android.R.anim.fade_out));
                                         MainActivity.toastView.setVisibility(View.GONE);
                                     }
                                 };
@@ -2869,9 +2880,14 @@ class MyAdapter extends ArrayAdapter<String> {
 
                             MainActivity.db.updateSnoozedTimestamp
                                     (MainActivity.sortedIDs.get(position), "0");
-
                             if (MainActivity.showMotivation) {
-                                MainActivity.toast.setText(R.string.youKilledThisTask);
+                                //showing motivational toast
+                                int i = MainActivity.random.nextInt(5);
+                                while (MainActivity.killedAffirmation[i].equals(MainActivity.lastKilledToast)) {
+                                    i = MainActivity.random.nextInt(5);
+                                }
+                                MainActivity.lastKilledToast = MainActivity.killedAffirmation[i];
+                                MainActivity.toast.setText(MainActivity.killedAffirmation[i]);
                                 final Handler handler = new Handler();
 
                                 final Runnable runnable = new Runnable() {
@@ -2879,15 +2895,14 @@ class MyAdapter extends ArrayAdapter<String> {
                                         if (!MainActivity.mute) {
                                             MainActivity.sweep.start();
                                         }
-                                        MainActivity.toastView.startAnimation
-                                                (AnimationUtils.loadAnimation(getContext(),
-                                                        R.anim.enter_from_right_fast));
+                                        MainActivity.toastView.startAnimation(AnimationUtils.loadAnimation
+                                                (getContext(), R.anim.enter_from_right_fast));
                                         MainActivity.toastView.setVisibility(View.VISIBLE);
                                         final Handler handler2 = new Handler();
                                         final Runnable runnable2 = new Runnable() {
                                             public void run() {
-                                                MainActivity.toastView.startAnimation
-                                                        (AnimationUtils.loadAnimation
+                                                MainActivity.toastView.startAnimation(
+                                                        AnimationUtils.loadAnimation
                                                                 (getContext(),
                                                                         android.R.anim.fade_out));
                                                 MainActivity.toastView.setVisibility(View.GONE);
@@ -2896,6 +2911,7 @@ class MyAdapter extends ArrayAdapter<String> {
                                         handler2.postDelayed(runnable2, 1500);
                                     }
                                 };
+
                                 handler.postDelayed(runnable, 500);
                             }
 

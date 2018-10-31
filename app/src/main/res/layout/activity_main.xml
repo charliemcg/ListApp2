@@ -13,19 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         style="@style/HeaderBar"
-        app:title="@string/app_name"
+        app:titleTextColor="@color/purple"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.LightTheme"
         app:popupTheme="@style/ThemeOverlay.LightTheme"
         android:background="@color/turquoise"
         android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/toolbar_light"
-        android:background="@color/mid_gray"/>
+    <!--<TextView-->
+        <!--android:id="@+id/divider"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_below="@+id/toolbar_light"-->
+        <!--android:background="@color/mid_gray"/>-->
 
     <LinearLayout
         android:id="@+id/purchases"
@@ -304,7 +304,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/theListView"
-        android:layout_below="@+id/divider"
+        android:layout_below="@+id/toolbar_light"
         android:background="@color/turquoise"
         android:descendantFocusability="blocksDescendants"/>
 

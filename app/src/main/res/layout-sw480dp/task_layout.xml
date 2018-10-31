@@ -7,7 +7,7 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context="com.violenthoboenterprises.listapp2.MainActivity"
     android:descendantFocusability="beforeDescendants"
-    android:background="@color/dark_gray">
+    android:background="@color/turquoise">
 
     <RelativeLayout
         android:id="@+id/adRow"

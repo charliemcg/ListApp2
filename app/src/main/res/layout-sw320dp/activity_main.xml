@@ -8,24 +8,30 @@
     android:orientation="vertical"
     android:id="@+id/activityRoot">
 
+    <!--<TextView-->
+        <!--android:id="@+id/dividerTop"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/mid_gray"/>-->
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_light"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         style="@style/HeaderBar"
-        app:title="@string/app_name"
         android:elevation="4dp"
+        app:titleTextColor="@color/purple"
         android:theme="@style/ThemeOverlay.LightTheme"
         app:popupTheme="@style/ThemeOverlay.LightTheme"
         android:background="@color/turquoise"
         android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/toolbar_light"
-        android:background="@color/mid_gray"/>
+    <!--<TextView-->
+        <!--android:id="@+id/divider"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_below="@+id/toolbar_light"-->
+        <!--android:background="@color/mid_gray"/>-->
 
     <LinearLayout
         android:id="@+id/purchases"
@@ -304,7 +310,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/theListView"
-        android:layout_below="@+id/divider"
+        android:layout_below="@+id/toolbar_light"
         android:background="@color/turquoise"
         android:descendantFocusability="blocksDescendants"/>
 

@@ -118,7 +118,12 @@ public class AlertReceiver extends BroadcastReceiver {
 
             remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification_light);
             remoteViews.setTextViewText(R.id.notif_title, dbTask);
-
+            //showing motivational toast
+            int j = MainActivity.random.nextInt(5);
+            while (MainActivity.motivation[j].equals(MainActivity.lastToast)) {
+                j = MainActivity.random.nextInt(5);
+            }
+            remoteViews.setTextViewText(R.id.notif_affirmation, /*MainActivity.motivation[j])*/"test");
 
         //Setting up notification channel for Oreo
         final String notificChannelId = "notification_channel";
