@@ -807,8 +807,8 @@ class MyAdapter extends ArrayAdapter<String> {
 
             dueLayout.setVisibility(View.GONE);
 
-            snoozeClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
-            snoozeClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+//            snoozeClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+//            snoozeClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
 
         }
 
@@ -883,7 +883,11 @@ class MyAdapter extends ArrayAdapter<String> {
                             (getContext(), R.color.black));
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
-                    dueClearWhite.setVisibility(View.VISIBLE);
+                    if(!dbKilled) {
+                        dueClearWhite.setVisibility(View.VISIBLE);
+                    }else{
+                        dueKilled.setVisibility(View.VISIBLE);
+                    }
 //                    dueClearWhite.setBackgroundColor(ContextCompat
 //                            .getColor(getContext(), R.color.black));
                 }
@@ -926,7 +930,11 @@ class MyAdapter extends ArrayAdapter<String> {
                             (getContext(), R.color.black));
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
-                    dueClearWhite.setVisibility(View.VISIBLE);
+                    if(!dbKilled) {
+                        dueClearWhite.setVisibility(View.VISIBLE);
+                    }else{
+                        dueKilled.setVisibility(View.VISIBLE);
+                    }
 //                    dueClearWhite.setBackgroundColor(ContextCompat
 //                            .getColor(getContext(), R.color.black));
                 }
@@ -957,7 +965,11 @@ class MyAdapter extends ArrayAdapter<String> {
                                 (getContext(), R.color.black));
                         overdueLayout.setVisibility(View.GONE);
                         dueLayout.setVisibility(View.VISIBLE);
-                        dueClearWhite.setVisibility(View.VISIBLE);
+                        if(!dbKilled) {
+                            dueClearWhite.setVisibility(View.VISIBLE);
+                        }else{
+                            dueKilled.setVisibility(View.VISIBLE);
+                        }
 //                        dueClearWhite.setBackgroundColor(ContextCompat
 //                                .getColor(getContext(), R.color.black));
                     }
@@ -981,7 +993,11 @@ class MyAdapter extends ArrayAdapter<String> {
                                 (getContext(), R.color.black));
                         overdueLayout.setVisibility(View.GONE);
                         dueLayout.setVisibility(View.VISIBLE);
-                        dueClearWhite.setVisibility(View.VISIBLE);
+                        if(!dbKilled) {
+                            dueClearWhite.setVisibility(View.VISIBLE);
+                        }else{
+                            dueKilled.setVisibility(View.VISIBLE);
+                        }
 //                        dueClearWhite.setBackgroundColor(ContextCompat
 //                               .getColor(getContext(), R.color.black));
                     }

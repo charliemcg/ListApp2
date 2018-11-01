@@ -606,7 +606,8 @@ public class MainActivity extends AppCompatActivity implements
 //                    buffer.append("IGNORED: " + res.getString(14) + "\n");
 //                    buffer.append("CREATETIMESTAMP: " + res.getString(15) + "\n");
 //                    buffer.append("SORTEDINDEX: " + res.getString(16) + "\n");
-//                    buffer.append("CHECKLISTSIZE: " + res.getString(17) + "\n\n");
+//                    buffer.append("CHECKLISTSIZE: " + res.getString(17) + "\n");
+//                    buffer.append("SNOOZESTAMP: " + res.getString(21) + "\n\n");
 //                }
 //                res.close();
 //
