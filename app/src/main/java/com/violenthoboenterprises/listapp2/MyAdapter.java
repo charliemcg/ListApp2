@@ -119,10 +119,13 @@ class MyAdapter extends ArrayAdapter<String> {
 
         ImageView repeatClearWhite = taskView.findViewById(R.id.repeatClearWhite);
         ImageView noteClearWhite = taskView.findViewById(R.id.noteClearWhite);
+        ImageView noteKilled = taskView.findViewById(R.id.noteKilled);
         ImageView checklistClearWhite = taskView.findViewById(R.id.checklistClearWhite);
+        ImageView checklistKilled = taskView.findViewById(R.id.checklistKilled);
         ImageView overdueClearWhite = taskView.findViewById(R.id.overdueClearWhite);
         final ImageView snoozeClearWhite = taskView.findViewById(R.id.snoozeClearWhite);
         final ImageView dueClearWhite = taskView.findViewById(R.id.dueClearWhite);
+        final ImageView dueKilled = taskView.findViewById(R.id.dueKilled);
         ImageView noteBtnIconWhite = taskView.findViewById(R.id.noteBtnIconWhite);
         ImageView subTasksBtnIconWhite = taskView.findViewById(R.id.subTasksBtnIconWhite);
         ImageView alarmBtnIconWhite = taskView.findViewById(R.id.alarmBtnIconWhite);
@@ -426,7 +429,7 @@ class MyAdapter extends ArrayAdapter<String> {
             }
         }
 
-        if(dbDue || !dbNote.equals("") || dbChecklist){
+        if(dbDue || !dbNote.equals("") || dbChecklistSize > 0){
             statusLayout.setVisibility(View.VISIBLE);
         }
 
@@ -992,6 +995,7 @@ class MyAdapter extends ArrayAdapter<String> {
                     }else{
 //                            dueClearWhite.setBackgroundColor(ContextCompat
 //                                    .getColor(getContext(), R.color.black));
+                        dueKilled.setVisibility(View.VISIBLE);
                     }
                 }
             //Not overdue
@@ -4178,7 +4182,7 @@ class MyAdapter extends ArrayAdapter<String> {
 //            repeatClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
             repeatClearWhite.setVisibility(View.VISIBLE);
         }else{
-            repeatClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
+//            repeatClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
 
         //Show checklist/note icon if required
@@ -4189,6 +4193,7 @@ class MyAdapter extends ArrayAdapter<String> {
             }else{
 //                checklistClearWhite.setBackgroundColor(ContextCompat
 //                        .getColor(getContext(), R.color.black));
+                checklistKilled.setVisibility(View.VISIBLE);
             }
         }else{
 //            checklistClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
@@ -4198,11 +4203,12 @@ class MyAdapter extends ArrayAdapter<String> {
 //                noteClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
                 noteClearWhite.setVisibility(View.VISIBLE);
             }else{
-                noteClearWhite.setBackgroundColor(ContextCompat
-                        .getColor(getContext(), R.color.black));
+//                noteClearWhite.setBackgroundColor(ContextCompat
+//                        .getColor(getContext(), R.color.black));
+                noteKilled.setVisibility(View.VISIBLE);
             }
         }else{
-            noteClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
+//            noteClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
 
         //greying out unselected tasks

@@ -119,6 +119,13 @@
                     android:src="@drawable/subtasks_icon_light"
                     android:visibility="gone"/>
 
+                <ImageView
+                    android:id="@+id/checklistKilled"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/subtasks_icon_killed"
+                    android:visibility="gone"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -133,6 +140,13 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/note_icon_light"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/noteKilled"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/note_icon_killed"
                     android:visibility="gone"/>
 
             </RelativeLayout>
@@ -165,6 +179,13 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/due_icon_light"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/dueKilled"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/due_icon_killed"
                     android:visibility="gone"/>
 
             </RelativeLayout>
