@@ -871,8 +871,8 @@ class MyAdapter extends ArrayAdapter<String> {
                 dueLayout.setVisibility(View.GONE);
                 overdueLayout.setVisibility(View.VISIBLE);
                 if(!dbKilled) {
-                    overdueClearWhite.setBackgroundColor(ContextCompat
-                            .getColor(getContext(), R.color.darkRed));
+//                    overdueClearWhite.setBackgroundColor(ContextCompat
+//                            .getColor(getContext(), R.color.darkRed));
                     dueTextView.setTextColor(ContextCompat.getColor
                             (getContext(), R.color.darkRed));
                 }else{
@@ -881,8 +881,8 @@ class MyAdapter extends ArrayAdapter<String> {
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
                     dueClearWhite.setVisibility(View.VISIBLE);
-                    dueClearWhite.setBackgroundColor(ContextCompat
-                            .getColor(getContext(), R.color.black));
+//                    dueClearWhite.setBackgroundColor(ContextCompat
+//                            .getColor(getContext(), R.color.black));
                 }
                 markAsOverdue = true;
             //Overdue
@@ -892,8 +892,8 @@ class MyAdapter extends ArrayAdapter<String> {
                 overdueLayout.setVisibility(View.VISIBLE);
                 dueTextView.setTextColor(Color.parseColor("#FF0000"));
                 if(!dbKilled) {
-                    overdueClearWhite.setBackgroundColor(ContextCompat
-                            .getColor(getContext(), R.color.darkRed));
+//                    overdueClearWhite.setBackgroundColor(ContextCompat
+//                            .getColor(getContext(), R.color.darkRed));
                     dueTextView.setTextColor(ContextCompat.getColor
                             (getContext(), R.color.darkRed));
                 }else{
@@ -902,8 +902,8 @@ class MyAdapter extends ArrayAdapter<String> {
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
                     dueClearWhite.setVisibility(View.VISIBLE);
-                    dueClearWhite.setBackgroundColor(ContextCompat
-                            .getColor(getContext(), R.color.black));
+//                    dueClearWhite.setBackgroundColor(ContextCompat
+//                            .getColor(getContext(), R.color.black));
                 }
                 markAsOverdue = true;
             //Overdue
@@ -914,8 +914,8 @@ class MyAdapter extends ArrayAdapter<String> {
                 overdueLayout.setVisibility(View.VISIBLE);
                 dueTextView.setTextColor(Color.parseColor("#FF0000"));
                 if(!dbKilled) {
-                    overdueClearWhite.setBackgroundColor(ContextCompat
-                            .getColor(getContext(), R.color.darkRed));
+//                    overdueClearWhite.setBackgroundColor(ContextCompat
+//                            .getColor(getContext(), R.color.darkRed));
                     dueTextView.setTextColor(ContextCompat.getColor
                             (getContext(), R.color.darkRed));
                 }else{
@@ -924,8 +924,8 @@ class MyAdapter extends ArrayAdapter<String> {
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
                     dueClearWhite.setVisibility(View.VISIBLE);
-                    dueClearWhite.setBackgroundColor(ContextCompat
-                            .getColor(getContext(), R.color.black));
+//                    dueClearWhite.setBackgroundColor(ContextCompat
+//                            .getColor(getContext(), R.color.black));
                 }
                 markAsOverdue = true;
             } else if (currentYear == Integer.valueOf(year)
@@ -945,8 +945,8 @@ class MyAdapter extends ArrayAdapter<String> {
                     overdueLayout.setVisibility(View.VISIBLE);
                     dueTextView.setTextColor(Color.parseColor("#FF0000"));
                     if(!dbKilled) {
-                        overdueClearWhite.setBackgroundColor(ContextCompat
-                                .getColor(getContext(), R.color.darkRed));
+//                        overdueClearWhite.setBackgroundColor(ContextCompat
+//                                .getColor(getContext(), R.color.darkRed));
                         dueTextView.setTextColor(ContextCompat.getColor
                                 (getContext(), R.color.darkRed));
                     }else{
@@ -955,8 +955,8 @@ class MyAdapter extends ArrayAdapter<String> {
                         overdueLayout.setVisibility(View.GONE);
                         dueLayout.setVisibility(View.VISIBLE);
                         dueClearWhite.setVisibility(View.VISIBLE);
-                        dueClearWhite.setBackgroundColor(ContextCompat
-                                .getColor(getContext(), R.color.black));
+//                        dueClearWhite.setBackgroundColor(ContextCompat
+//                                .getColor(getContext(), R.color.black));
                     }
                     markAsOverdue = true;
                 //Overdue
@@ -969,8 +969,8 @@ class MyAdapter extends ArrayAdapter<String> {
                     overdueLayout.setVisibility(View.VISIBLE);
                     dueTextView.setTextColor(Color.parseColor("#FF0000"));
                     if(!dbKilled) {
-                        overdueClearWhite.setBackgroundColor(ContextCompat
-                                .getColor(getContext(), R.color.darkRed));
+//                        overdueClearWhite.setBackgroundColor(ContextCompat
+//                                .getColor(getContext(), R.color.darkRed));
                         dueTextView.setTextColor(ContextCompat.getColor
                                 (getContext(), R.color.darkRed));
                     }else{
@@ -979,8 +979,8 @@ class MyAdapter extends ArrayAdapter<String> {
                         overdueLayout.setVisibility(View.GONE);
                         dueLayout.setVisibility(View.VISIBLE);
                         dueClearWhite.setVisibility(View.VISIBLE);
-                        dueClearWhite.setBackgroundColor(ContextCompat
-                               .getColor(getContext(), R.color.black));
+//                        dueClearWhite.setBackgroundColor(ContextCompat
+//                               .getColor(getContext(), R.color.black));
                     }
                     markAsOverdue = true;
                 //Not overdue
@@ -990,8 +990,8 @@ class MyAdapter extends ArrayAdapter<String> {
 //                                (MainActivity.highlight));
                         dueClearWhite.setVisibility(View.VISIBLE);
                     }else{
-                            dueClearWhite.setBackgroundColor(ContextCompat
-                                    .getColor(getContext(), R.color.black));
+//                            dueClearWhite.setBackgroundColor(ContextCompat
+//                                    .getColor(getContext(), R.color.black));
                     }
                 }
             //Not overdue
@@ -1029,9 +1029,9 @@ class MyAdapter extends ArrayAdapter<String> {
                     }
                 }
                 if(!dbKilled) {
-                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+//                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
                 }else{
-                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+//                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
                 }
             }
 
@@ -1141,7 +1141,7 @@ class MyAdapter extends ArrayAdapter<String> {
             }
 
         }else{
-            dueClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
+//            dueClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }
 
         //actions to occur in regards to selected task

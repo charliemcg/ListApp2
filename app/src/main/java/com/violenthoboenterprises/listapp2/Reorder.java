@@ -42,6 +42,8 @@ public class Reorder {
             String dbID = "";
             String dbTask = "";
             boolean dbDue = false;
+            boolean dbKilled = false;
+            boolean dbOverdue = false;
             String dbSnoozeStamp = "";
             Cursor dbResult = MainActivity.db.getData(allIDs.get(i));
             while (dbResult.moveToNext()) {
@@ -49,6 +51,8 @@ public class Reorder {
                 dbTimestamp = dbResult.getString(3);
                 dbTask = dbResult.getString(4);
                 dbDue = dbResult.getInt(5) > 0;
+                dbKilled = dbResult.getInt(6) > 0;
+                dbOverdue = dbResult.getInt(9) > 0;
                 dbSnooze = dbResult.getInt(10) > 0;
                 dbInterval = dbResult.getInt(12);
                 dbSnoozeStamp = dbResult.getString(21);
@@ -74,6 +78,7 @@ public class Reorder {
             alarmResult.close();
 
             if(dbSnooze) {
+                Log.i(TAG, "One");
                 tempList.add(Integer.parseInt(dbSnoozeStamp));
                 snoozedIDs.add(Integer.parseInt(dbID));
             }else if (dbDue){
@@ -85,18 +90,23 @@ public class Reorder {
                 alarmCal.set(Calendar.HOUR, Integer.parseInt(alarmHour));
                 alarmCal.set(Calendar.MINUTE, Integer.parseInt(alarmMinute));
                 if(Integer.parseInt(dbTimestamp) > (alarmCal.getTimeInMillis() / 1000)){
+                    Log.i(TAG, "Two");
                     tempList.add(Integer.parseInt(String.valueOf(alarmCal.getTimeInMillis() / 1000)));
                     wrongIDList.add(dbID);
                     correctTimestampList.add(dbTimestamp);
                     positionCounter.add(Integer.parseInt(String.valueOf(alarmCal.getTimeInMillis() / 1000)));
                 }else {
+                    Log.i(TAG, "Three");
                     tempList.add(Integer.valueOf(dbTimestamp));
                 }
             }else{
+                Log.i(TAG, "Four");
                 tempList.add(Integer.valueOf(dbTimestamp));
             }
 
         }
+
+        Log.i(TAG, "tempList0: " + tempList);
 
         ArrayList<String> whenTaskCreated = new ArrayList<>();
 
@@ -150,6 +160,10 @@ public class Reorder {
 
         Collections.sort(tempList);
 
+//        Log.i(TAG, "tempTaskList0: " + tempTaskList);
+
+        Log.i(TAG, "tempList1: " + tempList);
+
         //Adding due tasks which aren't killed to middle of task list
         for(int i = 0; i < MainActivity.taskList.size(); i++) {
 
@@ -199,11 +213,18 @@ public class Reorder {
             dbResult.close();
         }
 
+        Log.i(TAG, "tempList2: " + tempList);
+
+//        Log.i(TAG, "tempTaskList1: " + tempTaskList);
+
         //Adding killed tasks to end of task list
         for(int i = 0; i < tempKilledIdsList.size(); i++){
             tempTaskList.add(tempKilledTaskList.get(i));
             tempIdsList.add(tempKilledIdsList.get(i));
         }
+
+//        Log.i(TAG, "tempTaskList2: " + tempTaskList);
+//        Log.i(TAG, "tempIdsList2: " + tempIdsList);
 
         //Adding killed tasks with due dates to end of task list
         for(int i = 0; i < MainActivity.taskList.size(); i++){
@@ -213,14 +234,17 @@ public class Reorder {
             String dbTask = "";
             boolean dbKilled = false;
             boolean dbRepeat = false;
+            Log.i(TAG, "tempList: " + tempList);
             Cursor dbResult = MainActivity.db.getDataByDueTime(
                     String.valueOf(tempList.get(i)));
             boolean dataExists = false;
             while (dbResult.moveToNext()) {
+                Log.i(TAG, "I'm in here");
                 dbId = dbResult.getInt(0);
                 dbTask = dbResult.getString(4);
                 dbKilled = dbResult.getInt(6) > 0;
                 if((tempList.get(i) != 0) && dbKilled){
+                    Log.i(TAG, "I'm in here");
                     tempIdsList.add(String.valueOf(dbId));
                     tempTaskList.add(dbTask);
                 }
@@ -234,7 +258,7 @@ public class Reorder {
                     dbTask = dbResult.getString(4);
                     dbKilled = dbResult.getInt(6) > 0;
                     dbRepeat = dbResult.getInt(8) > 0;
-                    if ((tempList.get(i) != 0) && !dbKilled && !dbRepeat) {
+                    if ((tempList.get(i) != 0) && !dbKilled && !dbRepeat && !tempIdsList.contains(String.valueOf(dbId))) {
                         tempIdsList.add(String.valueOf(dbId));
                         tempTaskList.add(dbTask);
                     }
@@ -243,12 +267,17 @@ public class Reorder {
             dbResult.close();
         }
 
+//        Log.i(TAG, "tempTaskList3: " + tempTaskList);
+//        Log.i(TAG, "tempIdsList3: " + tempIdsList);
+
         for(int i = 0; i < MainActivity.taskList.size(); i++){
 
             MainActivity.db.updateSortedIndex(String.valueOf(i),
                     Integer.parseInt(tempIdsList.get(i)));
 
         }
+
+//        Log.i(TAG, "tempTaskList4: " + tempTaskList);
 
         MainActivity.sortedIDs = tempIdsList;
         MainActivity.taskList = tempTaskList;
