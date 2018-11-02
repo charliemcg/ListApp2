@@ -130,7 +130,11 @@ class MyAdapter extends ArrayAdapter<String> {
         ImageView subTasksBtnIconWhite = taskView.findViewById(R.id.subTasksBtnIconWhite);
         ImageView alarmBtnIconWhite = taskView.findViewById(R.id.alarmBtnIconWhite);
         ImageView completeWhite = taskView.findViewById(R.id.completeWhite);
-        ImageView completedWhite = taskView.findViewById(R.id.completedWhite);
+        final ImageView completedWhite = taskView.findViewById(R.id.completedWhite);
+        final ImageView completedOne = taskView.findViewById(R.id.completedOne);
+        final ImageView completedTwo = taskView.findViewById(R.id.completedTwo);
+        final ImageView completedThree = taskView.findViewById(R.id.completedThree);
+        final ImageView completedFour = taskView.findViewById(R.id.completedFour);
 
         //Exit animations for when properties are removed due to user clicking on the list item //TODO complete this and make it less buggy
 //        if((position == MainActivity.activeTask) && !MainActivity.taskPropertiesShowing && MainActivity.timePickerShowing) {
@@ -314,12 +318,12 @@ class MyAdapter extends ArrayAdapter<String> {
             alarmBtnIconWhite.setVisibility(View.VISIBLE);
             subTasksBtnIconWhite.setVisibility(View.VISIBLE);
             noteBtnIconWhite.setVisibility(View.VISIBLE);
-            alarm.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
-                    R.drawable.layout_border_white));
-            subTasks.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
-                    R.drawable.layout_border_white));
-            note.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
-                    R.drawable.layout_border_white));
+//            alarm.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
+//                    R.drawable.layout_border_white));
+//            subTasks.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
+//                    R.drawable.layout_border_white));
+//            note.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),
+//                    R.drawable.layout_border_white));
 
         //TODO see if it is possible to make these animations run smooth
         //Animating a killed task moving down through the list view
@@ -470,11 +474,11 @@ class MyAdapter extends ArrayAdapter<String> {
         if(MainActivity.exitTaskProperties && (position == MainActivity.activeTask)){
             if(!dbOverdue){
 
-                ViewGroup.LayoutParams params = alarm.getLayoutParams();
-                params.width = MainActivity.deviceWidth / 3;
-                alarm.setLayoutParams(params);
-                subTasks.setLayoutParams(params);
-                note.setLayoutParams(params);
+//                ViewGroup.LayoutParams params = alarm.getLayoutParams();
+//                params.width = MainActivity.deviceWidth / 3;
+//                alarm.setLayoutParams(params);
+//                subTasks.setLayoutParams(params);
+//                note.setLayoutParams(params);
 
                 propertyRow.setVisibility(View.VISIBLE);
                 propertyRow.startAnimation(AnimationUtils.loadAnimation
@@ -3565,11 +3569,11 @@ class MyAdapter extends ArrayAdapter<String> {
             //show tasks properties
             }else{
 
-                ViewGroup.LayoutParams params = alarm.getLayoutParams();
-                params.width = MainActivity.deviceWidth / 3;
-                alarm.setLayoutParams(params);
-                subTasks.setLayoutParams(params);
-                note.setLayoutParams(params);
+//                ViewGroup.LayoutParams params = alarm.getLayoutParams();
+//                params.width = MainActivity.deviceWidth / 3;
+//                alarm.setLayoutParams(params);
+//                subTasks.setLayoutParams(params);
+//                note.setLayoutParams(params);
 
                 propertyRow.startAnimation(AnimationUtils.loadAnimation(getContext(),
                         R.anim.enter_from_right));
@@ -4187,9 +4191,8 @@ class MyAdapter extends ArrayAdapter<String> {
             theTextView.setPaintFlags(theTextView.getPaintFlags() |
                     Paint.STRIKE_THRU_TEXT_FLAG);
 
-
-                completeWhite.setVisibility(View.GONE);
-                completedWhite.setVisibility(View.VISIBLE);
+            completedWhite.setVisibility(View.VISIBLE);
+            completeWhite.setVisibility(View.GONE);
 
         }
 

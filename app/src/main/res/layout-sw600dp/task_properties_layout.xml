@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context="com.violenthoboenterprises.listapp2.MainActivity"
-    android:background="@color/white">
+    android:background="@color/turquoise">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,15 +20,18 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:background="@drawable/layout_border">
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white">
+            <!--android:background="@drawable/layout_border">-->
 
             <ImageView
                 android:id="@+id/alarmBtnIconWhite"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:src="@drawable/due_icon_light_solid"/>
+            <!--android:layout_margin="5dp"-->
 
             <TextView
                 android:id="@+id/alarmBtnText"
@@ -45,21 +48,25 @@
         <LinearLayout
             android:id="@+id/subTasks"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:background="@drawable/layout_border">
+            android:layout_marginTop="5dp"
+            android:background="@color/white">
+            <!--android:background="@drawable/layout_border">-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_marginLeft="5dp"-->
 
             <ImageView
                 android:id="@+id/subTasksBtnIconWhite"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_gravity="left|center_vertical"
                 android:src="@drawable/subtasks_icon_light_solid"/>
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
 
             <TextView
                 android:id="@+id/subtasksBtnText"
@@ -77,18 +84,20 @@
         <LinearLayout
             android:id="@+id/note"
             android:layout_width="0dp"
-            android:layout_height="90dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:background="@drawable/layout_border">
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/white">
+            <!--android:background="@drawable/layout_border">-->
 
             <ImageView
                 android:id="@+id/noteBtnIconWhite"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:src="@drawable/note_icon_light_solid"/>
 
             <TextView

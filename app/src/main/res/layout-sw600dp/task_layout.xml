@@ -84,6 +84,58 @@
                 android:visibility="gone"
                 android:soundEffectsEnabled="false"/>
 
+            <ImageView
+                android:id="@+id/completedOne"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:src="@drawable/tick_complete_one"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="complete"
+                android:visibility="gone"
+                android:soundEffectsEnabled="false"/>
+
+            <ImageView
+                android:id="@+id/completedTwo"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:src="@drawable/tick_complete_two"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="complete"
+                android:visibility="gone"
+                android:soundEffectsEnabled="false"/>
+
+            <ImageView
+                android:id="@+id/completedThree"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:src="@drawable/tick_complete_three"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="complete"
+                android:visibility="gone"
+                android:soundEffectsEnabled="false"/>
+
+            <ImageView
+                android:id="@+id/completedFour"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:src="@drawable/tick_complete_four"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="complete"
+                android:visibility="gone"
+                android:soundEffectsEnabled="false"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -228,7 +280,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/turquoise">
         <include
             layout="@layout/task_properties_layout"
             android:id="@+id/properties"
