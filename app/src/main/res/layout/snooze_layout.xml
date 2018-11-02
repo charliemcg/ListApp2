@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context="com.violenthoboenterprises.listapp2.MainActivity"
-    android:background="@color/white">
+    android:background="@color/turquoise">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,9 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/layout_border">
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/color_picker_border_white">
 
             <TextView
                 android:id="@+id/oneHourBtnText"
@@ -38,7 +40,7 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/layout_border">
+            android:background="@drawable/color_picker_border_white">
 
             <TextView
                 android:id="@+id/fourHoursBtnText"
@@ -58,7 +60,7 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/layout_border">
+            android:background="@drawable/color_picker_border_white">
 
             <TextView
                 android:id="@+id/tomorrowBtnText"

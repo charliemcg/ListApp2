@@ -42,6 +42,12 @@
     </RelativeLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/color_picker_border_white">
+
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -210,31 +216,25 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include
-            layout="@layout/task_properties_layout"
-            android:id="@+id/properties"
-            android:visibility="gone"/>
-        <include
-            layout="@layout/snooze_layout"
-            android:id="@+id/snoozeRow"
-            android:visibility="gone"/>
-        <include
-            layout="@layout/task_overdue_layout"
-            android:id="@+id/taskIsOverdue"
-            android:visibility="gone"/>
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/buffer"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/turquoise">
+            <include
+                layout="@layout/task_properties_layout"
+                android:id="@+id/properties"
+                android:visibility="gone"/>
+            <include
+                layout="@layout/snooze_layout"
+                android:id="@+id/snoozeRow"
+                android:visibility="gone"/>
+            <include
+                layout="@layout/task_overdue_layout"
+                android:id="@+id/taskIsOverdue"
+                android:visibility="gone"/>
+        </LinearLayout>
 
     </LinearLayout>
 

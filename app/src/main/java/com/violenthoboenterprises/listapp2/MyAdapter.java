@@ -1713,11 +1713,11 @@ class MyAdapter extends ArrayAdapter<String> {
             //show the overdue properties
             if(dbOverdue && !dbSnooze && !dbIgnored){
 
-                ViewGroup.LayoutParams params = snoozeTask.getLayoutParams();
-                params.width = MainActivity.deviceWidth / 3;
-                snoozeTask.setLayoutParams(params);
-                taskDone.setLayoutParams(params);
-                taskIgnore.setLayoutParams(params);
+//                ViewGroup.LayoutParams params = snoozeTask.getLayoutParams();
+//                params.width = MainActivity.deviceWidth / 3;
+//                snoozeTask.setLayoutParams(params);
+//                taskDone.setLayoutParams(params);
+//                taskIgnore.setLayoutParams(params);
 
                 taskOverdueRow.startAnimation(AnimationUtils.loadAnimation
                         (getContext(), android.R.anim.slide_in_left));
@@ -1733,11 +1733,11 @@ class MyAdapter extends ArrayAdapter<String> {
                         taskOverdueRow.startAnimation(AnimationUtils.loadAnimation
                                 (getContext(), R.anim.exit_out_right));
 
-                        ViewGroup.LayoutParams params = oneHourBtn.getLayoutParams();
-                        params.width = MainActivity.deviceWidth / 3;
-                        oneHourBtn.setLayoutParams(params);
-                        fourHourBtn.setLayoutParams(params);
-                        tomorrowBtn.setLayoutParams(params);
+//                        ViewGroup.LayoutParams params = oneHourBtn.getLayoutParams();
+//                        params.width = MainActivity.deviceWidth / 3;
+//                        oneHourBtn.setLayoutParams(params);
+//                        fourHourBtn.setLayoutParams(params);
+//                        tomorrowBtn.setLayoutParams(params);
 
                         final Handler handler = new Handler();
 

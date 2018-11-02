@@ -16,30 +16,36 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
 
-    <RelativeLayout
-        android:id="@+id/adRow"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:descendantFocusability="blocksDescendants">
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="SMART_BANNER"
-            android:visibility="gone"/>
-
-        <ImageView
-            android:id="@+id/banner"
-            android:src="@drawable/banner"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+        <RelativeLayout
+            android:id="@+id/adRow"
             android:visibility="gone"
-            android:onClick="showPro"
-            android:contentDescription="@string/accessBannerPromptingUser"/>
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:descendantFocusability="blocksDescendants">
 
-    </RelativeLayout>
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ads:adSize="SMART_BANNER"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/banner"
+                android:src="@drawable/banner"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:visibility="gone"
+                android:onClick="showPro"
+                android:contentDescription="@string/accessBannerPromptingUser"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/color_picker_border_white">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -278,23 +284,25 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/turquoise">
-        <include
-            layout="@layout/task_properties_layout"
-            android:id="@+id/properties"
-            android:visibility="gone"/>
-        <include
-            layout="@layout/snooze_layout"
-            android:id="@+id/snoozeRow"
-            android:visibility="gone"/>
-        <include
-            layout="@layout/task_overdue_layout"
-            android:id="@+id/taskIsOverdue"
-            android:visibility="gone"/>
-    </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/turquoise">
+            <include
+                layout="@layout/task_properties_layout"
+                android:id="@+id/properties"
+                android:visibility="gone"/>
+            <include
+                layout="@layout/snooze_layout"
+                android:id="@+id/snoozeRow"
+                android:visibility="gone"/>
+            <include
+                layout="@layout/task_overdue_layout"
+                android:id="@+id/taskIsOverdue"
+                android:visibility="gone"/>
+        </LinearLayout>
 
     </LinearLayout>
 

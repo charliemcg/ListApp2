@@ -22,14 +22,15 @@
             android:padding="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
-            android:background="@color/white">
-            <!--android:background="@drawable/layout_border">-->
+            android:background="@drawable/color_picker_border_white">
 
             <ImageView
                 android:id="@+id/alarmBtnIconWhite"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:src="@drawable/due_icon_light_solid"/>
             <!--android:layout_margin="5dp"-->
 
@@ -53,7 +54,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:layout_marginTop="5dp"
-            android:background="@color/white">
+            android:background="@drawable/color_picker_border_white">
             <!--android:background="@drawable/layout_border">-->
             <!--android:layout_marginRight="5dp"-->
             <!--android:layout_marginLeft="5dp"-->
@@ -90,7 +91,7 @@
             android:padding="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:background="@color/white">
+            android:background="@drawable/color_picker_border_white">
             <!--android:background="@drawable/layout_border">-->
 
             <ImageView

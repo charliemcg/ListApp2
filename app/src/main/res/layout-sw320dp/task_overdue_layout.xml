@@ -19,7 +19,9 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/layout_border">
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/color_picker_border_white">
 
             <TextView
                 android:id="@+id/snoozeTaskBtnText"
@@ -39,7 +41,8 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/layout_border">
+            android:layout_marginTop="5dp"
+            android:background="@drawable/color_picker_border_white">
 
             <TextView
                 android:id="@+id/taskDoneBtnText"
@@ -59,7 +62,9 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/layout_border">
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/color_picker_border_white">
 
             <TextView
                 android:id="@+id/taskIgnoreBtnText"
