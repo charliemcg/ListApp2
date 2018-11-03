@@ -335,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements
 //        MobileAds.initialize(this, /*app id here*/);//TODO get app id from admob
 
         toolbarLight = findViewById(R.id.toolbar_light);
+        toolbarLight.setTitle("");
         setSupportActionBar(toolbarLight);
 
         //Initialising variables
@@ -954,7 +955,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void checkLightDark() {
 //            theListView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            toolbarLight.setVisibility(View.VISIBLE);
+//            toolbarLight.setVisibility(View.VISIBLE);
             setSupportActionBar(toolbarLight);
             removeAdsTitle.setTextColor(Color.parseColor("#000000"));
             removeAdsDescription.setTextColor(Color.parseColor("#000000"));
