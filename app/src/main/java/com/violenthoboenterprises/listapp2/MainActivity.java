@@ -1761,8 +1761,9 @@ public class MainActivity extends AppCompatActivity implements
                 db.updateReviewTwo(reviewTwo);
                 db.updateReviewThree(reviewThree);
                 db.updateReviewFour(reviewFour);
-                //TODO find out if this needs to go into strings.xml
-                String url = "https://play.google.com/store/apps/details?id=com.violenthoboenterprises.taskkiller";
+                //TODO get correct path
+//                String url = "https://play.google.com/store/apps/details?id=com.violenthoboenterprises.taskkiller";
+                String url = "";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

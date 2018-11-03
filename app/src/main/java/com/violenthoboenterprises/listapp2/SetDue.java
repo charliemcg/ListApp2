@@ -50,12 +50,12 @@ public class SetDue extends MainActivity {
     LinearLayout lightRepeat;
     static ImageView time, timeFadedLight, calendar,
             calendarFadedLight;
-    ImageView dailyLight, weeklyLight, monthlyLight, cancelRepeatLight;
+    ImageView dailyLight, weeklyLight, monthlyLight, cancelRepeatLight, daily, weekly, monthly, cancelRepeat;
     View pickerRoot;
     TextView dateTextView;
     TextView timeTextView;
-    TextView divTwo;
-    static TextView divThree;
+//    TextView divTwo;
+//    static TextView divThree;
     String repeat;
     static boolean setDue;
     static String dbTaskId;
@@ -92,17 +92,21 @@ public class SetDue extends MainActivity {
         dateTextView = findViewById(R.id.dateTextView);
         timeTextView = findViewById(R.id.timeTextView);
         dailyLight = findViewById(R.id.dailyLight);
+        daily = findViewById(R.id.daily);
         weeklyLight = findViewById(R.id.weeklyLight);
+        weekly = findViewById(R.id.weekly);
         monthlyLight = findViewById(R.id.monthlyLight);
+        monthly = findViewById(R.id.monthly);
         cancelRepeatLight = findViewById(R.id.cancelRepeatLight);
-        divTwo = findViewById(R.id.divTwo);
-        divThree = findViewById(R.id.divThree);
+        cancelRepeat = findViewById(R.id.cancelRepeat);
+//        divTwo = findViewById(R.id.divTwo);
+//        divThree = findViewById(R.id.divThree);
 
         screenSize = getResources().getConfiguration().screenLayout &
                 Configuration.SCREENLAYOUT_SIZE_MASK;
 
-        divTwo.setBackgroundColor(Color.parseColor(highlight));
-        divThree.setBackgroundColor(Color.parseColor(highlight));
+//        divTwo.setBackgroundColor(Color.parseColor(highlight));
+//        divThree.setBackgroundColor(Color.parseColor(highlight));
 
         //getting task data
         dbDueTime = "";
@@ -243,21 +247,29 @@ public class SetDue extends MainActivity {
 //            dueToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
             dateTextView.setTextColor(Color.parseColor("#000000"));
             timeTextView.setTextColor(Color.parseColor("#000000"));
-            cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
-            dailyLight.setBackgroundColor(Color.parseColor("#000000"));
-            weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
-            monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
+//            cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
+//            dailyLight.setBackgroundColor(Color.parseColor("#000000"));
+//            weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
+//            monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
             lightRepeat.setVisibility(View.VISIBLE);
 
         //Highlight the repeat type or highlight No Repeat if none exists
         if(!dbRepeat){
-            cancelRepeatLight.setBackgroundColor(Color.parseColor(highlight));
+//            cancelRepeatLight.setBackgroundColor(Color.parseColor(highlight));
+            cancelRepeatLight.setVisibility(View.GONE);
+            cancelRepeat.setVisibility(View.VISIBLE);
         }else if(dbRepeatInterval.equals("day")){
-            dailyLight.setBackgroundColor(Color.parseColor(highlight));
+//            dailyLight.setBackgroundColor(Color.parseColor(highlight));
+            dailyLight.setVisibility(View.GONE);
+            daily.setVisibility(View.VISIBLE);
         }else if(dbRepeatInterval.equals("week")){
-            weeklyLight.setBackgroundColor(Color.parseColor(highlight));
+//            weeklyLight.setBackgroundColor(Color.parseColor(highlight));
+            weeklyLight.setVisibility(View.GONE);
+            weekly.setVisibility(View.VISIBLE);
         }else if(dbRepeatInterval.equals("month")){
-            monthlyLight.setBackgroundColor(Color.parseColor(highlight));
+//            monthlyLight.setBackgroundColor(Color.parseColor(highlight));
+            monthlyLight.setVisibility(View.GONE);
+            monthly.setVisibility(View.VISIBLE);
         }
 
         //Actions to occur when user selects to set/change date
@@ -305,10 +317,18 @@ public class SetDue extends MainActivity {
                 vibrate.vibrate(50);
 
                 //Show user which button they selected by highlighting it
-                cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
-                dailyLight.setBackgroundColor(Color.parseColor(highlight));
-                weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
-                monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
+//                cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
+                cancelRepeatLight.setVisibility(View.VISIBLE);
+                cancelRepeat.setVisibility(View.GONE);
+//                dailyLight.setBackgroundColor(Color.parseColor(highlight));
+                dailyLight.setVisibility(View.GONE);
+                daily.setVisibility(View.VISIBLE);
+//                weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
+                weeklyLight.setVisibility(View.VISIBLE);
+                weekly.setVisibility(View.GONE);
+//                monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
+                monthlyLight.setVisibility(View.VISIBLE);
+                monthly.setVisibility(View.GONE);
 
                 repeatInterval = AlarmManager.INTERVAL_DAY;
                 db.updateRepeatIntervalTemp(String.valueOf(AlarmManager.INTERVAL_DAY));
@@ -338,10 +358,18 @@ public class SetDue extends MainActivity {
                 vibrate.vibrate(50);
 
                 //Show user which button they selected by highlighting it
-                cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
-                dailyLight.setBackgroundColor(Color.parseColor("#000000"));
-                weeklyLight.setBackgroundColor(Color.parseColor(highlight));
-                monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
+//                cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
+                cancelRepeatLight.setVisibility(View.VISIBLE);
+                cancelRepeat.setVisibility(View.GONE);
+//                dailyLight.setBackgroundColor(Color.parseColor("#000000"));
+                dailyLight.setVisibility(View.VISIBLE);
+                daily.setVisibility(View.GONE);
+//                weeklyLight.setBackgroundColor(Color.parseColor(highlight));
+                weeklyLight.setVisibility(View.GONE);
+                weekly.setVisibility(View.VISIBLE);
+//                monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
+                monthlyLight.setVisibility(View.VISIBLE);
+                monthly.setVisibility(View.GONE);
 
                 repeatInterval = AlarmManager.INTERVAL_DAY * 7;
 
@@ -370,10 +398,18 @@ public class SetDue extends MainActivity {
                 vibrate.vibrate(50);
 
                 //Show user which button they selected by highlighting it
-                cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
-                dailyLight.setBackgroundColor(Color.parseColor("#000000"));
-                weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
-                monthlyLight.setBackgroundColor(Color.parseColor(highlight));
+//                cancelRepeatLight.setBackgroundColor(Color.parseColor("#000000"));
+                cancelRepeatLight.setVisibility(View.VISIBLE);
+                cancelRepeat.setVisibility(View.GONE);
+//                dailyLight.setBackgroundColor(Color.parseColor("#000000"));
+                dailyLight.setVisibility(View.VISIBLE);
+                daily.setVisibility(View.GONE);
+//                weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
+                weeklyLight.setVisibility(View.VISIBLE);
+                weekly.setVisibility(View.GONE);
+//                monthlyLight.setBackgroundColor(Color.parseColor(highlight));
+                monthlyLight.setVisibility(View.GONE);
+                monthly.setVisibility(View.VISIBLE);
 
                 repeat = "month";
 
@@ -400,10 +436,18 @@ public class SetDue extends MainActivity {
 
                 vibrate.vibrate(50);
 
-                cancelRepeatLight.setBackgroundColor(Color.parseColor(highlight));
-                dailyLight.setBackgroundColor(Color.parseColor("#000000"));
-                weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
-                monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
+//                cancelRepeatLight.setBackgroundColor(Color.parseColor(highlight));
+                cancelRepeatLight.setVisibility(View.GONE);
+                cancelRepeat.setVisibility(View.VISIBLE);
+//                dailyLight.setBackgroundColor(Color.parseColor("#000000"));
+                dailyLight.setVisibility(View.VISIBLE);
+                daily.setVisibility(View.GONE);
+//                weeklyLight.setBackgroundColor(Color.parseColor("#000000"));
+                weeklyLight.setVisibility(View.VISIBLE);
+                weekly.setVisibility(View.GONE);
+//                monthlyLight.setBackgroundColor(Color.parseColor("#000000"));
+                monthlyLight.setVisibility(View.VISIBLE);
+                monthly.setVisibility(View.GONE);
 
                 repeat = "none";
 
@@ -550,14 +594,22 @@ public class SetDue extends MainActivity {
                                         timeTextView.setTextSize(15);
                                     }
 
-                                        cancelRepeatLight.setBackgroundColor
-                                                (Color.parseColor(highlight));
-                                        dailyLight.setBackgroundColor
-                                                (Color.parseColor("#000000"));
-                                        weeklyLight.setBackgroundColor
-                                                (Color.parseColor("#000000"));
-                                        monthlyLight.setBackgroundColor
-                                                (Color.parseColor("#000000"));
+//                                        cancelRepeatLight.setBackgroundColor
+//                                                (Color.parseColor(highlight));
+                                    cancelRepeatLight.setVisibility(View.GONE);
+                                    cancelRepeat.setVisibility(View.VISIBLE);
+//                                        dailyLight.setBackgroundColor
+//                                                (Color.parseColor("#000000"));
+                                    dailyLight.setVisibility(View.VISIBLE);
+                                    daily.setVisibility(View.GONE);
+//                                        weeklyLight.setBackgroundColor
+//                                                (Color.parseColor("#000000"));
+                                    weeklyLight.setVisibility(View.VISIBLE);
+                                    weekly.setVisibility(View.GONE);
+//                                        monthlyLight.setBackgroundColor
+//                                                (Color.parseColor("#000000"));
+                                    monthlyLight.setVisibility(View.VISIBLE);
+                                    monthly.setVisibility(View.GONE);
 
                                 }
                             };
