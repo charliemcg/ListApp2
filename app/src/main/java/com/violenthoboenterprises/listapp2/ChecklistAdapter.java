@@ -53,7 +53,7 @@ class ChecklistAdapter extends ArrayAdapter<String> {
 //            checklistItemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             checklistTextView.setTextColor(Color.parseColor("#000000"));
             if(Checklist.fadeSubTasks){
-                checklistTextView.setTextColor(Color.parseColor("#DDDDDD"));
+                checklistTextView.setTextColor(Color.parseColor("#AAAAAA"));
                 tickWhite.setVisibility(View.GONE);
                 tickWhiteFaded.setVisibility(View.VISIBLE);
             }else {

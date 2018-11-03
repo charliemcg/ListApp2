@@ -884,6 +884,7 @@ class MyAdapter extends ArrayAdapter<String> {
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
                     if(!dbKilled) {
+                        Log.i(TAG, "one");
                         dueClearWhite.setVisibility(View.VISIBLE);
                     }else{
                         dueKilled.setVisibility(View.VISIBLE);
@@ -910,6 +911,7 @@ class MyAdapter extends ArrayAdapter<String> {
                             (getContext(), R.color.black));
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
+                    Log.i(TAG, "two");
                     dueClearWhite.setVisibility(View.VISIBLE);
 //                    dueClearWhite.setBackgroundColor(ContextCompat
 //                            .getColor(getContext(), R.color.black));
@@ -934,6 +936,7 @@ class MyAdapter extends ArrayAdapter<String> {
                     overdueLayout.setVisibility(View.GONE);
                     dueLayout.setVisibility(View.VISIBLE);
                     if(!dbKilled) {
+                        Log.i(TAG, "three");
                         dueClearWhite.setVisibility(View.VISIBLE);
                     }else{
                         dueKilled.setVisibility(View.VISIBLE);
@@ -970,6 +973,7 @@ class MyAdapter extends ArrayAdapter<String> {
                         overdueLayout.setVisibility(View.GONE);
                         dueLayout.setVisibility(View.VISIBLE);
                         if(!dbKilled) {
+                            Log.i(TAG, "four");
                             dueClearWhite.setVisibility(View.VISIBLE);
                         }else{
                             dueKilled.setVisibility(View.VISIBLE);
@@ -999,6 +1003,7 @@ class MyAdapter extends ArrayAdapter<String> {
                         overdueLayout.setVisibility(View.GONE);
                         dueLayout.setVisibility(View.VISIBLE);
                         if(!dbKilled) {
+                            Log.i(TAG, "five");
                             dueClearWhite.setVisibility(View.VISIBLE);
                         }else{
                             dueKilled.setVisibility(View.VISIBLE);
@@ -1013,6 +1018,7 @@ class MyAdapter extends ArrayAdapter<String> {
                     if(!dbKilled) {
 //                        dueClearWhite.setBackgroundColor(Color.parseColor
 //                                (MainActivity.highlight));
+                        Log.i(TAG, "six");
                         dueClearWhite.setVisibility(View.VISIBLE);
                     }else{
 //                            dueClearWhite.setBackgroundColor(ContextCompat
@@ -1056,6 +1062,7 @@ class MyAdapter extends ArrayAdapter<String> {
                 }
                 if(!dbKilled) {
 //                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+                    Log.i(TAG, "seven");
                     dueClearWhite.setVisibility(View.VISIBLE);
                 }else{
 //                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
@@ -1170,7 +1177,8 @@ class MyAdapter extends ArrayAdapter<String> {
 
         }else{
 //            dueClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
-            dueClearWhite.setVisibility(View.VISIBLE);
+//            dueClearWhite.setVisibility(View.VISIBLE);
+            Log.i(TAG, "eight");
         }
 
         //actions to occur in regards to selected task

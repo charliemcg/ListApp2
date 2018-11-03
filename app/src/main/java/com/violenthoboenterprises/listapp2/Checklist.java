@@ -114,11 +114,11 @@ public class Checklist extends MainActivity {
             subTasksToolbar.setSubtitleTextColor(Color.parseColor("#666666"));
 //            checklistView.setBackgroundColor(Color.parseColor("#FFFFFF"));
 //            subTasksToolbar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            int[] colors = {Color.parseColor("#FFFFFF"), Integer.parseInt(highlightDec),
-                    Integer.parseInt(highlightDec)};
-            checklistView.setDivider(new GradientDrawable(
-                    GradientDrawable.Orientation.LEFT_RIGHT, colors));
-            checklistView.setDividerHeight(1);
+//            int[] colors = {Color.parseColor("#FFFFFF"), Integer.parseInt(highlightDec),
+//                    Integer.parseInt(highlightDec)};
+//            checklistView.setDivider(new GradientDrawable(
+//                    GradientDrawable.Orientation.LEFT_RIGHT, colors));
+//            checklistView.setDividerHeight(1);
 
         //setting up adapter
         checklistAdapter = new ListAdapter[]{new ChecklistAdapter(this, checklist)};
