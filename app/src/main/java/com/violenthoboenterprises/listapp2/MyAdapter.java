@@ -131,10 +131,6 @@ class MyAdapter extends ArrayAdapter<String> {
         ImageView alarmBtnIconWhite = taskView.findViewById(R.id.alarmBtnIconWhite);
         ImageView completeWhite = taskView.findViewById(R.id.completeWhite);
         final ImageView completedWhite = taskView.findViewById(R.id.completedWhite);
-        final ImageView completedOne = taskView.findViewById(R.id.completedOne);
-        final ImageView completedTwo = taskView.findViewById(R.id.completedTwo);
-        final ImageView completedThree = taskView.findViewById(R.id.completedThree);
-        final ImageView completedFour = taskView.findViewById(R.id.completedFour);
 
         //Exit animations for when properties are removed due to user clicking on the list item //TODO complete this and make it less buggy
 //        if((position == MainActivity.activeTask) && !MainActivity.taskPropertiesShowing && MainActivity.timePickerShowing) {
@@ -894,6 +890,8 @@ class MyAdapter extends ArrayAdapter<String> {
                     }
 //                    dueClearWhite.setBackgroundColor(ContextCompat
 //                            .getColor(getContext(), R.color.black));
+                    dueKilled.setVisibility(View.VISIBLE);
+
                 }
                 markAsOverdue = true;
             //Overdue
@@ -915,6 +913,7 @@ class MyAdapter extends ArrayAdapter<String> {
                     dueClearWhite.setVisibility(View.VISIBLE);
 //                    dueClearWhite.setBackgroundColor(ContextCompat
 //                            .getColor(getContext(), R.color.black));
+                    dueKilled.setVisibility(View.VISIBLE);
                 }
                 markAsOverdue = true;
             //Overdue
@@ -941,6 +940,7 @@ class MyAdapter extends ArrayAdapter<String> {
                     }
 //                    dueClearWhite.setBackgroundColor(ContextCompat
 //                            .getColor(getContext(), R.color.black));
+                    dueKilled.setVisibility(View.VISIBLE);
                 }
                 markAsOverdue = true;
             } else if (currentYear == Integer.valueOf(year)
@@ -976,6 +976,7 @@ class MyAdapter extends ArrayAdapter<String> {
                         }
 //                        dueClearWhite.setBackgroundColor(ContextCompat
 //                                .getColor(getContext(), R.color.black));
+                        dueKilled.setVisibility(View.VISIBLE);
                     }
                     markAsOverdue = true;
                 //Overdue
@@ -1004,6 +1005,7 @@ class MyAdapter extends ArrayAdapter<String> {
                         }
 //                        dueClearWhite.setBackgroundColor(ContextCompat
 //                               .getColor(getContext(), R.color.black));
+                        dueKilled.setVisibility(View.VISIBLE);
                     }
                     markAsOverdue = true;
                 //Not overdue
@@ -1054,8 +1056,10 @@ class MyAdapter extends ArrayAdapter<String> {
                 }
                 if(!dbKilled) {
 //                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+                    dueClearWhite.setVisibility(View.VISIBLE);
                 }else{
 //                    dueClearWhite.setBackgroundColor(Color.parseColor(MainActivity.highlight));
+                    dueKilled.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -1166,6 +1170,7 @@ class MyAdapter extends ArrayAdapter<String> {
 
         }else{
 //            dueClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
+            dueClearWhite.setVisibility(View.VISIBLE);
         }
 
         //actions to occur in regards to selected task
