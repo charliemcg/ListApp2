@@ -14,11 +14,6 @@
         android:background="@color/turquoise"
         android:elevation="4dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/mid_gray"/>
-
     <LinearLayout
         android:id="@+id/dateBtn"
         android:layout_width="match_parent"
@@ -26,7 +21,8 @@
         android:layout_weight="3"
         android:orientation="horizontal"
         android:layout_margin="20dp"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:background="@drawable/color_picker_border_white">
 
         <ImageView
             android:id="@+id/calendarFadedLight"
@@ -59,13 +55,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/divTwo"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
-
     <LinearLayout
         android:id="@+id/timeBtn"
         android:layout_width="match_parent"
@@ -73,7 +62,8 @@
         android:layout_weight="3"
         android:orientation="horizontal"
         android:layout_margin="20dp"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:background="@drawable/color_picker_border_white">
 
         <ImageView
             android:id="@+id/timeFadedLight"
@@ -106,61 +96,15 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/divThree"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
-
-        <LinearLayout
-            android:id="@+id/darkRepeatLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:visibility="gone">
-
-            <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center">
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center">
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center">
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:gravity="center">
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
         <LinearLayout
             android:id="@+id/lightRepeatLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:visibility="gone">
@@ -178,6 +122,13 @@
                     android:contentDescription="@string/accessNoRepeat"
                     android:src="@drawable/repeat_none_light"/>
 
+                <ImageView
+                    android:id="@+id/cancelRepeat"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/no_repeat"
+                    android:visibility="gone"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -192,6 +143,13 @@
                     android:layout_height="65dp"
                     android:contentDescription="@string/accessDailyRepeat"
                     android:src="@drawable/repeat_day_light"/>
+
+                <ImageView
+                    android:id="@+id/daily"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/repeat_daily"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 
@@ -208,6 +166,13 @@
                     android:contentDescription="Circular arrow that says weekly repeat."
                     android:src="@drawable/repeat_week_light"/>
 
+                <ImageView
+                    android:id="@+id/weekly"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/repeat_weekly"
+                    android:visibility="gone"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -222,6 +187,13 @@
                     android:layout_height="65dp"
                     android:contentDescription="@string/accessMonthlyRepeat"
                     android:src="@drawable/repeat_month_light"/>
+
+                <ImageView
+                    android:id="@+id/monthly"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/repeat_monthly"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 
