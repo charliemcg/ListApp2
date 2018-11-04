@@ -1,8 +1,10 @@
 package com.violenthoboenterprises.listapp2;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -4135,22 +4138,63 @@ class MyAdapter extends ArrayAdapter<String> {
                         }
                     }else{
 
-                        MainActivity.purchasesShowing = true;
-                        MainActivity.add.setClickable(false);
-                        MainActivity.theListView.setOnItemClickListener(null);
-                        MainActivity.taskPropertiesShowing = false;
-                        MainActivity.purchases.startAnimation(AnimationUtils.loadAnimation
-                                (getContext(), R.anim.enter_from_right));
+//                        MainActivity.purchasesShowing = true;
+//                        MainActivity.add.setClickable(false);
+//                        MainActivity.theListView.setOnItemClickListener(null);
+//                        MainActivity.taskPropertiesShowing = false;
+//                        MainActivity.purchases.startAnimation(AnimationUtils.loadAnimation
+//                                (getContext(), R.anim.enter_from_right));
+//
+//                        final Handler handler = new Handler();
+//
+//                        final Runnable runnable = new Runnable() {
+//                            public void run() {
+//                                MainActivity.purchases.setVisibility(View.VISIBLE);
+//                            }
+//                        };
+//
+//                        handler.postDelayed(runnable, 200);
 
-                        final Handler handler = new Handler();
+                        final Dialog dialog = new Dialog(getContext());
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setCancelable(false);
 
-                        final Runnable runnable = new Runnable() {
-                            public void run() {
-                                MainActivity.purchases.setVisibility(View.VISIBLE);
+                        dialog.setContentView(R.layout.purchases);
+
+                        Button positive = dialog.findViewById(R.id.positive);
+                        Button negative = dialog.findViewById(R.id.negative);
+
+                        positive.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                dialog.dismiss();
+                                if(!MainActivity.remindersAvailable && !MainActivity.adsRemoved) {
+
+                                    MainActivity.vibrate.vibrate(50);
+
+                                    if (!MainActivity.mute) {
+                                        MainActivity.chime.start();
+                                    }
+
+                                    MainActivity.tryAgain = true;
+                                    MainActivity.bp.purchase(null, "unlock_all");
+
+                                }
+
                             }
-                        };
+                        });
 
-                        handler.postDelayed(runnable, 200);
+                        negative.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        dialog.show();
 
                     }
 

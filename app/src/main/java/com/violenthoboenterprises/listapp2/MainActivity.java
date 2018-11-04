@@ -117,9 +117,9 @@ public class MainActivity extends AppCompatActivity implements
     //used to indicate that user purchased reminders
     static boolean remindersAvailable;
     //used to indicate that user purchased color cycling
-    boolean colorCyclingAllowed;
+//    boolean colorCyclingAllowed;
     //used to indicate whether color cycling should be on or not
-    boolean colorCyclingEnabled;
+//    boolean colorCyclingEnabled;
     //used to indicate that the snooze options are showing
     static boolean snoozeRowShowing;
     //used to indicate that a task was long clicked
@@ -133,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements
     static boolean blockSoundAndAnimate;
     //indicates that task was just reinstated
     static boolean justReinstated;
+    //attempting to upgrade to pro from MyAdapter causes an error so need to try again
+    static boolean tryAgain;
 
     //task properties require exit animation
     static boolean exitTaskProperties;
@@ -296,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements
     //The color picker view and it's corresponding buttons
     LinearLayout colorPicker;
 
-    BillingProcessor bp;
+    static BillingProcessor bp;
 
     //In-app purchases view and it's elements
     static LinearLayout purchases;
@@ -391,8 +393,8 @@ public class MainActivity extends AppCompatActivity implements
         purchases = findViewById(R.id.purchases);
         adsRemoved = false;
         remindersAvailable = false;
-        colorCyclingAllowed = false;
-        colorCyclingEnabled = false;
+//        colorCyclingAllowed = false;
+//        colorCyclingEnabled = false;
         removeAdsLayout = findViewById(R.id.removeAds);
         getRemindersLayout = findViewById(R.id.getReminders);
         cycleColorsLayout = findViewById(R.id.cycleColors);
@@ -445,6 +447,7 @@ public class MainActivity extends AppCompatActivity implements
         theListView.setOnScrollListener(this);
         blockSoundAndAnimate = false;
         justReinstated = false;
+        tryAgain = false;
 
         db.insertUniversalData(mute);
 
@@ -454,7 +457,7 @@ public class MainActivity extends AppCompatActivity implements
             highlight = dbResult.getString(2);
             adsRemoved = dbResult.getInt(5) > 0;
             remindersAvailable = dbResult.getInt(6) > 0;
-            colorCyclingAllowed = dbResult.getInt(7) > 0;
+//            colorCyclingAllowed = dbResult.getInt(7) > 0;
             highlightDec = dbResult.getString(29);
         }
         dbResult.close();
@@ -993,10 +996,10 @@ public class MainActivity extends AppCompatActivity implements
             if(!mute){
                 muteBtn.setChecked(true);
             }
-            if(colorCyclingEnabled){
-                autoColorBtn.setChecked(true);
-            }
-            if(colorCyclingAllowed && adsRemoved && remindersAvailable){
+//            if(colorCyclingEnabled){
+//                autoColorBtn.setChecked(true);
+//            }
+            if(adsRemoved && remindersAvailable){
                 proBtn.setVisible(false);
             }
             return true;
@@ -1080,26 +1083,7 @@ public class MainActivity extends AppCompatActivity implements
             //Actions to occur if user selects the pro icon
         } else if (id == R.id.buy) {
 
-            purchasesShowing = true;
-            add.setClickable(false);
-            theListView.setOnItemClickListener(null);
-            taskPropertiesShowing = false;
-
-                onCreateOptionsMenu(toolbarLight.getMenu());
-
-            theListView.setAdapter(theAdapter[0]);
-            purchases.startAnimation(AnimationUtils.loadAnimation
-                    (this, R.anim.enter_from_right));
-
-            final Handler handler = new Handler();
-
-            final Runnable runnable = new Runnable() {
-                public void run() {
-                    purchases.setVisibility(View.VISIBLE);
-                }
-            };
-
-            handler.postDelayed(runnable, 200);
+            purchasePrompt();
 
             return true;
 
@@ -1161,6 +1145,50 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void purchasePrompt() {
+
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+
+        dialog.setContentView(R.layout.purchases);
+
+        Button positive = dialog.findViewById(R.id.positive);
+        Button negative = dialog.findViewById(R.id.negative);
+
+        positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+                if(!remindersAvailable && !adsRemoved) {
+
+                    vibrate.vibrate(50);
+
+                    if (!mute) {
+                        chime.start();
+                    }
+
+                    bp.purchase(MainActivity.this, "unlock_all");
+
+                }
+
+            }
+        });
+
+        negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
+
     }
 
     @Override
@@ -1554,19 +1582,22 @@ public class MainActivity extends AppCompatActivity implements
             handler.postDelayed(runnable, 200);
             colorPickerShowing = false;
         }else{
-            purchases.startAnimation(AnimationUtils.loadAnimation
-                    (this, R.anim.exit_out_left));
+//            purchases.startAnimation(AnimationUtils.loadAnimation
+//                    (this, R.anim.exit_out_left));
+//
+//            final Handler handler = new Handler();
+//
+//            final Runnable runnable = new Runnable() {
+//                public void run() {
+//                    purchases.setVisibility(View.GONE);
+//                }
+//            };
+//
+//            handler.postDelayed(runnable, 200);
+//            purchasesShowing = false;
 
-            final Handler handler = new Handler();
+            purchasePrompt();
 
-            final Runnable runnable = new Runnable() {
-                public void run() {
-                    purchases.setVisibility(View.GONE);
-                }
-            };
-
-            handler.postDelayed(runnable, 200);
-            purchasesShowing = false;
         }
 
         theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -1682,28 +1713,31 @@ public class MainActivity extends AppCompatActivity implements
 
     public void showPro(View view) {
 
-        purchasesShowing = true;
-        add.setClickable(false);
-        theListView.setOnItemClickListener(null);
-        taskPropertiesShowing = false;
+//        purchasesShowing = true;
+//        add.setClickable(false);
+//        theListView.setOnItemClickListener(null);
+//        taskPropertiesShowing = false;
+//
+//            onCreateOptionsMenu(toolbarLight.getMenu());
+//
+//        theListView.setAdapter(theAdapter[0]);
 
-            onCreateOptionsMenu(toolbarLight.getMenu());
+//        purchases.startAnimation(AnimationUtils.loadAnimation
+//                (this, R.anim.enter_from_right));
+//
+//        final Handler handler = new Handler();
+//
+//        final Runnable runnable = new Runnable() {
+//            public void run() {
+//
+//                purchases.setVisibility(View.VISIBLE);
+//
+//            }
+//        };
+//
+//        handler.postDelayed(runnable, 200);
 
-        theListView.setAdapter(theAdapter[0]);
-        purchases.startAnimation(AnimationUtils.loadAnimation
-                (this, R.anim.enter_from_right));
-
-        final Handler handler = new Handler();
-
-        final Runnable runnable = new Runnable() {
-            public void run() {
-
-                purchases.setVisibility(View.VISIBLE);
-
-            }
-        };
-
-        handler.postDelayed(runnable, 200);
+        purchasePrompt();
 
     }
 
@@ -1802,33 +1836,72 @@ public class MainActivity extends AppCompatActivity implements
     public void onProductPurchased(@NonNull String productId,
                                    @Nullable TransactionDetails details) {
 
-        if(productId.equals("remove_ads")){
+//        if(productId.equals("remove_ads")){
+//
+//            db.updateAdsRemoved(true);
+//            adsRemoved = true;
+//            purchasesShowing = false;
+//            colorPickerShowing();
+//            if(remindersAvailable && adsRemoved){
+//                proBtn.setVisible(false);
+//            }
+//            removeAdsImg.setVisibility(View.GONE);
+//            removeAdsPurchasedImg.setVisibility(View.VISIBLE);
+//
+//        }else if(productId.equals("get_reminders")){
+//
+//            db.updateRemindersAvailable(true);
+//            remindersAvailable = true;
+//            purchasesShowing = false;
+//            colorPickerShowing();
+//            if(remindersAvailable && adsRemoved){
+//                proBtn.setVisible(false);
+//            }
+//            remindersImg.setVisibility(View.GONE);
+//            remindersPurchasedImg.setVisibility(View.VISIBLE);
+//
+//        }else if(productId.equals("cycle_colors")){
+//
+//            toast.setText(R.string.turnColorCyclingOnOff);
+//            final Handler handler = new Handler();
+//
+//            final Runnable runnable = new Runnable() {
+//                public void run() {
+//
+//                    if(!mute) {
+//                        sweep.start();
+//                    }
+//
+//                    toastView.startAnimation(AnimationUtils.loadAnimation
+//                            (MainActivity.this, R.anim.enter_from_right_fast));
+//                    toastView.setVisibility(View.VISIBLE);
+//                    final Handler handler2 = new Handler();
+//                    final Runnable runnable2 = new Runnable() {
+//                        public void run() {
+//                            toastView.startAnimation(AnimationUtils.loadAnimation
+//                                    (MainActivity.this, android.R.anim.fade_out));
+//                            toastView.setVisibility(View.GONE);
+//                        }
+//                    };
+//                    handler2.postDelayed(runnable2, 3500);
+//                }
+//            };
+//
+//            handler.postDelayed(runnable, 500);
+//
+//            db.updateCycleColors(true);
+//            colorCyclingAllowed = true;
+//            purchasesShowing = false;
+//            colorPickerShowing();
+//            if(colorCyclingAllowed && remindersAvailable && adsRemoved){
+//                proBtn.setVisible(false);
+//            }
+//            autoColorImg.setVisibility(View.GONE);
+//            autoColorPurchasedImg.setVisibility(View.VISIBLE);
 
-            db.updateAdsRemoved(true);
-            adsRemoved = true;
-            purchasesShowing = false;
-            colorPickerShowing();
-            if(colorCyclingAllowed && remindersAvailable && adsRemoved){
-                proBtn.setVisible(false);
-            }
-            removeAdsImg.setVisibility(View.GONE);
-            removeAdsPurchasedImg.setVisibility(View.VISIBLE);
+        if(productId.equals("unlock_all")){
 
-        }else if(productId.equals("get_reminders")){
-
-            db.updateRemindersAvailable(true);
-            remindersAvailable = true;
-            purchasesShowing = false;
-            colorPickerShowing();
-            if(colorCyclingAllowed && remindersAvailable && adsRemoved){
-                proBtn.setVisible(false);
-            }
-            remindersImg.setVisibility(View.GONE);
-            remindersPurchasedImg.setVisibility(View.VISIBLE);
-
-        }else if(productId.equals("cycle_colors")){
-
-            toast.setText(R.string.turnColorCyclingOnOff);
+            toast.setText("Thank you for your purchase.");
             final Handler handler = new Handler();
 
             final Runnable runnable = new Runnable() {
@@ -1849,46 +1922,7 @@ public class MainActivity extends AppCompatActivity implements
                             toastView.setVisibility(View.GONE);
                         }
                     };
-                    handler2.postDelayed(runnable2, 3500);
-                }
-            };
-
-            handler.postDelayed(runnable, 500);
-
-            db.updateCycleColors(true);
-            colorCyclingAllowed = true;
-            purchasesShowing = false;
-            colorPickerShowing();
-            if(colorCyclingAllowed && remindersAvailable && adsRemoved){
-                proBtn.setVisible(false);
-            }
-            autoColorImg.setVisibility(View.GONE);
-            autoColorPurchasedImg.setVisibility(View.VISIBLE);
-
-        }else if(productId.equals("unlock_all")){
-
-            toast.setText(R.string.turnColorCyclingOnOff);
-            final Handler handler = new Handler();
-
-            final Runnable runnable = new Runnable() {
-                public void run() {
-
-                    if(!mute) {
-                        sweep.start();
-                    }
-
-                    toastView.startAnimation(AnimationUtils.loadAnimation
-                            (MainActivity.this, R.anim.enter_from_right_fast));
-                    toastView.setVisibility(View.VISIBLE);
-                    final Handler handler2 = new Handler();
-                    final Runnable runnable2 = new Runnable() {
-                        public void run() {
-                            toastView.startAnimation(AnimationUtils.loadAnimation
-                                    (MainActivity.this, android.R.anim.fade_out));
-                            toastView.setVisibility(View.GONE);
-                        }
-                    };
-                    handler2.postDelayed(runnable2, 3500);
+                    handler2.postDelayed(runnable2, 2000);
                 }
             };
 
@@ -1896,21 +1930,21 @@ public class MainActivity extends AppCompatActivity implements
 
             db.updateAdsRemoved(true);
             db.updateRemindersAvailable(true);
-            db.updateCycleColors(true);
+//            db.updateCycleColors(true);
             adsRemoved = true;
             remindersAvailable = true;
-            colorCyclingAllowed = true;
-            purchasesShowing = false;
-            colorPickerShowing();
+//            colorCyclingAllowed = true;
+//            purchasesShowing = false;
+//            colorPickerShowing();
             proBtn.setVisible(false);
-            unlockAllImg.setVisibility(View.GONE);
-            unlockAllPurchasedImg.setVisibility(View.VISIBLE);
-            autoColorImg.setVisibility(View.GONE);
-            autoColorPurchasedImg.setVisibility(View.VISIBLE);
-            remindersImg.setVisibility(View.GONE);
-            remindersPurchasedImg.setVisibility(View.VISIBLE);
-            removeAdsImg.setVisibility(View.GONE);
-            removeAdsPurchasedImg.setVisibility(View.VISIBLE);
+//            unlockAllImg.setVisibility(View.GONE);
+//            unlockAllPurchasedImg.setVisibility(View.VISIBLE);
+//            autoColorImg.setVisibility(View.GONE);
+//            autoColorPurchasedImg.setVisibility(View.VISIBLE);
+//            remindersImg.setVisibility(View.GONE);
+//            remindersPurchasedImg.setVisibility(View.VISIBLE);
+//            removeAdsImg.setVisibility(View.GONE);
+//            removeAdsPurchasedImg.setVisibility(View.VISIBLE);
 
         }
 
@@ -1924,7 +1958,12 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onBillingError(int errorCode, @Nullable Throwable error) {
 
-        Toast.makeText(MainActivity.this, R.string.somethingWentWrong, Toast.LENGTH_LONG).show();
+        if(tryAgain) {
+            tryAgain = false;
+            bp.purchase(MainActivity.this, "unlock_all");
+        }else{
+            Toast.makeText(MainActivity.this, R.string.somethingWentWrong, Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -1949,66 +1988,68 @@ public class MainActivity extends AppCompatActivity implements
         super.onDestroy();
     }
 
-    public void removeAds(View view) {
+//    public void removeAds(View view) {
+//
+//        if(!adsRemoved) {
+//            vibrate.vibrate(50);
+//
+//            if (!mute) {
+//                chime.start();
+//            }
+//
+//            bp.purchase(this, "remove_ads");
+//
+//        }
+//
+//    }
 
-        if(!adsRemoved) {
-            vibrate.vibrate(50);
+//    public void getReminders(View view) {
+//
+//        if(!remindersAvailable) {
+//            vibrate.vibrate(50);
+//
+//            if (!mute) {
+//                chime.start();
+//            }
+//
+//            bp.purchase(this, "get_reminders");
+//
+//        }
+//
+//    }
 
-            if (!mute) {
-                chime.start();
-            }
+//    public void cycleColors(View view) {
+//
+//        if(!colorCyclingAllowed) {
+//            vibrate.vibrate(50);
+//
+//            if (!mute) {
+//                chime.start();
+//            }
+//
+//            bp.purchase(this, "cycle_colors");
+//
+//        }
+//
+//    }
 
-            bp.purchase(this, "remove_ads");
-
-        }
-
-    }
-
-    public void getReminders(View view) {
-
-        if(!remindersAvailable) {
-            vibrate.vibrate(50);
-
-            if (!mute) {
-                chime.start();
-            }
-
-            bp.purchase(this, "get_reminders");
-
-        }
-
-    }
-
-    public void cycleColors(View view) {
-
-        if(!colorCyclingAllowed) {
-            vibrate.vibrate(50);
-
-            if (!mute) {
-                chime.start();
-            }
-
-            bp.purchase(this, "cycle_colors");
-
-        }
-
-    }
-
-    public void unlockAll(View view) {
-
-        if(!colorCyclingAllowed && !remindersAvailable && !adsRemoved) {
-
-            vibrate.vibrate(50);
-
-            if (!mute) {
-                chime.start();
-            }
-
-            bp.purchase(this, "unlock_all");
-
-        }
-
-    }
+//    public void unlockAll(View view) {
+//
+//        Log.i(TAG, "I'm in here");
+//
+//        if(!remindersAvailable && !adsRemoved) {
+//
+//            vibrate.vibrate(50);
+//
+//            if (!mute) {
+//                chime.start();
+//            }
+//
+//            bp.purchase(this, "unlock_all");
+//
+//        }
+//
+//    }
 
     @Override
     protected void onPause(){
@@ -2049,9 +2090,9 @@ public class MainActivity extends AppCompatActivity implements
             highlight = dbResult.getString(2);
             adsRemoved = dbResult.getInt(5) > 0;
             remindersAvailable = dbResult.getInt(6) > 0;
-            colorCyclingAllowed = dbResult.getInt(7) > 0;
+//            colorCyclingAllowed = dbResult.getInt(7) > 0;
             taskLastChanged = dbResult.getInt(16);
-            colorCyclingEnabled = dbResult.getInt(18) > 0;
+//            colorCyclingEnabled = dbResult.getInt(18) > 0;
             duesSet = dbResult.getInt(19);
             showMotivation = dbResult.getInt(20) > 0;
             repeatHint = dbResult.getInt(21);
@@ -2065,12 +2106,12 @@ public class MainActivity extends AppCompatActivity implements
         }
         dbResult.close();
 
-        if(colorCyclingAllowed && colorCyclingEnabled) {
-            Calendar cal = Calendar.getInstance();
-            if((cal.getTimeInMillis() / 1000 / 60 / 60) >= (taskLastChanged + 4)) {
-                switchColor();
-            }
-        }
+//        if(colorCyclingAllowed && colorCyclingEnabled) {
+//            Calendar cal = Calendar.getInstance();
+//            if((cal.getTimeInMillis() / 1000 / 60 / 60) >= (taskLastChanged + 4)) {
+//                switchColor();
+//            }
+//        }
 
         checkLightDark();
 
@@ -2119,22 +2160,22 @@ public class MainActivity extends AppCompatActivity implements
 
         showPrompt(launchTime);
 
-        if(adsRemoved){
-            removeAdsImg.setVisibility(View.GONE);
-            removeAdsPurchasedImg.setVisibility(View.VISIBLE);
-        }
-        if(remindersAvailable){
-            remindersImg.setVisibility(View.GONE);
-            remindersPurchasedImg.setVisibility(View.VISIBLE);
-        }
-        if(colorCyclingAllowed){
-            autoColorImg.setVisibility(View.GONE);
-            autoColorPurchasedImg.setVisibility(View.VISIBLE);
-        }
-        if(adsRemoved || remindersAvailable || colorCyclingAllowed){
-            unlockAllImg.setVisibility(View.GONE);
-            unlockAllPurchasedImg.setVisibility(View.VISIBLE);
-        }
+//        if(adsRemoved){
+//            removeAdsImg.setVisibility(View.GONE);
+//            removeAdsPurchasedImg.setVisibility(View.VISIBLE);
+//        }
+//        if(remindersAvailable){
+//            remindersImg.setVisibility(View.GONE);
+//            remindersPurchasedImg.setVisibility(View.VISIBLE);
+//        }
+//        if(colorCyclingAllowed){
+//            autoColorImg.setVisibility(View.GONE);
+//            autoColorPurchasedImg.setVisibility(View.VISIBLE);
+//        }
+//        if(adsRemoved || remindersAvailable || colorCyclingAllowed){
+//            unlockAllImg.setVisibility(View.GONE);
+//            unlockAllPurchasedImg.setVisibility(View.VISIBLE);
+//        }
 
         //Setting the position for the toast
         toastParams.setMargins(15, (int) (deviceheight / 1.35), 0, 0);
