@@ -59,7 +59,7 @@
       android:layout_width="match_parent"
       android:layout_height="200dp"
       android:contentDescription="@string/accessMushroomCloudTick"
-      android:src="@drawable/mushroom_cloud"
+      android:src="@drawable/purchase_graphic"
       android:background="@color/lightTurquoise"/>
 
   <TextView

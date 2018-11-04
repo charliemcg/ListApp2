@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">List App 2</string>
+    <string name="app_name">Blistful</string>
     <string name="taskTitle">What are you going to do?</string>
     <string name="checklistItem">Add a sub-task here…</string>
     <string name="smashThatTask">You can do it!</string>
@@ -101,7 +101,7 @@
     <string name="accessTrashCan">Gray trash can representing a delete button.</string>
     <string name="accessMushroomCloudTick">Mushroom cloud with tick and five stars.</string>
     <string name="accessPlusSign">Plus sign for adding tasks.</string>
-    <string name="appNameFull">List App 2</string>
+    <string name="appNameFull">Blistful</string>
     <string name="buy">Buy</string>
     <string name="alarm">Alarm</string>
     <string name="turnColorCyclingOnOff">Turn colour cycling on/off in the top right menu.</string>
