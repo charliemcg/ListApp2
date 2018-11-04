@@ -119,8 +119,14 @@
                     android:id="@+id/checklistClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/mid_gray"
                     android:src="@drawable/subtasks_icon_light"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/checklistKilled"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/subtasks_icon_killed"
                     android:visibility="gone"/>
 
             </RelativeLayout>
@@ -136,8 +142,14 @@
                     android:id="@+id/noteClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/mid_gray"
                     android:src="@drawable/note_icon_light"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/noteKilled"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/note_icon_killed"
                     android:visibility="gone"/>
 
             </RelativeLayout>
@@ -153,7 +165,6 @@
                     android:id="@+id/repeatClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/mid_gray"
                     android:src="@drawable/repeat_icon_light"
                     android:visibility="gone"/>
 
@@ -170,8 +181,14 @@
                     android:id="@+id/dueClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/mid_gray"
                     android:src="@drawable/due_icon_light"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/dueKilled"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/due_icon_killed"
                     android:visibility="gone"/>
 
             </RelativeLayout>
@@ -188,7 +205,6 @@
                     android:id="@+id/overdueClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/mid_gray"
                     android:src="@drawable/overdue_icon_light"
                     android:visibility="gone"/>
 
@@ -206,7 +222,6 @@
                     android:id="@+id/snoozeClearWhite"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@color/mid_gray"
                     android:src="@drawable/snooze_icon_white"
                     android:visibility="gone"/>
 
