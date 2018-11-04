@@ -4289,43 +4289,86 @@ class MyAdapter extends ArrayAdapter<String> {
 
         }
 
-        if(!dbNote.equals("")){
-            if(dbDue && !dbRepeat){
-                noteClearWhite.setVisibility(View.GONE);
-                repeatClearWhite.setVisibility(View.VISIBLE);
-                repeatClearWhite.setImageResource(R.drawable.note_icon_light);
-            }else if(!dbRepeat){
-                noteClearWhite.setVisibility(View.GONE);
-                dueClearWhite.setVisibility(View.VISIBLE);
-                dueClearWhite.setImageResource(R.drawable.note_icon_light);
+        if(!dbKilled) {
+            if (!dbNote.equals("")) {
+                if (dbDue && !dbRepeat) {
+                    noteClearWhite.setVisibility(View.GONE);
+                    repeatClearWhite.setVisibility(View.VISIBLE);
+                    repeatClearWhite.setImageResource(R.drawable.note_icon_light);
+                } else if (!dbRepeat) {
+                    noteClearWhite.setVisibility(View.GONE);
+                    dueClearWhite.setVisibility(View.VISIBLE);
+                    dueClearWhite.setImageResource(R.drawable.note_icon_light);
+                }
             }
-        }
-        if(dbChecklistSize > 0){
-            if(dbDue){
-                if(dbRepeat && !dbNote.equals("")){
-                    checklistClearWhite.setVisibility(View.GONE);
-                    noteClearWhite.setVisibility(View.VISIBLE);
-                    noteClearWhite.setImageResource(R.drawable.subtasks_icon_light);
-                }else{
-                    if(dbNote.equals("")) {
-                        checklistClearWhite.setVisibility(View.GONE);
-                        repeatClearWhite.setVisibility(View.VISIBLE);
-                        repeatClearWhite.setImageResource(R.drawable.subtasks_icon_light);
-                    }else{
+            if (dbChecklistSize > 0) {
+                if (dbDue) {
+                    if (dbRepeat && !dbNote.equals("")) {
                         checklistClearWhite.setVisibility(View.GONE);
                         noteClearWhite.setVisibility(View.VISIBLE);
                         noteClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                    } else {
+                        if (dbNote.equals("")) {
+                            checklistClearWhite.setVisibility(View.GONE);
+                            repeatClearWhite.setVisibility(View.VISIBLE);
+                            repeatClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                        } else {
+                            checklistClearWhite.setVisibility(View.GONE);
+                            noteClearWhite.setVisibility(View.VISIBLE);
+                            noteClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                        }
+                    }
+                } else {
+                    if (dbNote.equals("")) {
+                        checklistClearWhite.setVisibility(View.GONE);
+                        dueClearWhite.setVisibility(View.VISIBLE);
+                        dueClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                    } else {
+                        checklistClearWhite.setVisibility(View.GONE);
+                        repeatClearWhite.setVisibility(View.VISIBLE);
+                        repeatClearWhite.setImageResource(R.drawable.subtasks_icon_light);
                     }
                 }
-            }else{
-                if(dbNote.equals("")) {
-                    checklistClearWhite.setVisibility(View.GONE);
-                    dueClearWhite.setVisibility(View.VISIBLE);
-                    dueClearWhite.setImageResource(R.drawable.subtasks_icon_light);
-                }else{
-                    checklistClearWhite.setVisibility(View.GONE);
+            }
+        }else{
+            if (!dbNote.equals("")) {
+                if (dbDue) {
+                    noteKilled.setVisibility(View.GONE);
                     repeatClearWhite.setVisibility(View.VISIBLE);
-                    repeatClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                    repeatClearWhite.setImageResource(R.drawable.note_icon_killed);
+                } else {
+                    noteKilled.setVisibility(View.GONE);
+                    dueKilled.setVisibility(View.VISIBLE);
+                    dueKilled.setImageResource(R.drawable.note_icon_killed);
+                }
+            }
+            if (dbChecklistSize > 0) {
+                if (dbDue) {
+                    if (!dbNote.equals("")) {
+                        checklistKilled.setVisibility(View.GONE);
+                        noteKilled.setVisibility(View.VISIBLE);
+                        noteKilled.setImageResource(R.drawable.subtasks_icon_killed);
+                    } else {
+                        if (dbNote.equals("")) {
+                            checklistKilled.setVisibility(View.GONE);
+                            repeatClearWhite.setVisibility(View.VISIBLE);
+                            repeatClearWhite.setImageResource(R.drawable.subtasks_icon_killed);
+                        } else {
+                            checklistKilled.setVisibility(View.GONE);
+                            noteKilled.setVisibility(View.VISIBLE);
+                            noteKilled.setImageResource(R.drawable.subtasks_icon_killed);
+                        }
+                    }
+                } else {
+                    if (dbNote.equals("")) {
+                        checklistKilled.setVisibility(View.GONE);
+                        dueKilled.setVisibility(View.VISIBLE);
+                        dueKilled.setImageResource(R.drawable.subtasks_icon_killed);
+                    } else {
+                        checklistKilled.setVisibility(View.GONE);
+                        repeatClearWhite.setVisibility(View.VISIBLE);
+                        repeatClearWhite.setImageResource(R.drawable.subtasks_icon_killed);
+                    }
                 }
             }
         }
