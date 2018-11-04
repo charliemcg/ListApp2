@@ -1178,7 +1178,7 @@ class MyAdapter extends ArrayAdapter<String> {
         }else{
 //            dueClearWhite.setBackgroundColor(Color.parseColor("#DDDDDD"));
 //            dueClearWhite.setVisibility(View.VISIBLE);
-            Log.i(TAG, "eight");
+//            Log.i(TAG, "eight");
         }
 
         //actions to occur in regards to selected task
@@ -4287,6 +4287,47 @@ class MyAdapter extends ArrayAdapter<String> {
             MainActivity.taskNameEditText.setSelection(MainActivity.taskNameEditText
                     .getText().length());
 
+        }
+
+        if(!dbNote.equals("")){
+            if(dbDue && !dbRepeat){
+                noteClearWhite.setVisibility(View.GONE);
+                repeatClearWhite.setVisibility(View.VISIBLE);
+                repeatClearWhite.setImageResource(R.drawable.note_icon_light);
+            }else if(!dbRepeat){
+                noteClearWhite.setVisibility(View.GONE);
+                dueClearWhite.setVisibility(View.VISIBLE);
+                dueClearWhite.setImageResource(R.drawable.note_icon_light);
+            }
+        }
+        if(dbChecklistSize > 0){
+            if(dbDue){
+                if(dbRepeat && !dbNote.equals("")){
+                    checklistClearWhite.setVisibility(View.GONE);
+                    noteClearWhite.setVisibility(View.VISIBLE);
+                    noteClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                }else{
+                    if(dbNote.equals("")) {
+                        checklistClearWhite.setVisibility(View.GONE);
+                        repeatClearWhite.setVisibility(View.VISIBLE);
+                        repeatClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                    }else{
+                        checklistClearWhite.setVisibility(View.GONE);
+                        noteClearWhite.setVisibility(View.VISIBLE);
+                        noteClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                    }
+                }
+            }else{
+                if(dbNote.equals("")) {
+                    checklistClearWhite.setVisibility(View.GONE);
+                    dueClearWhite.setVisibility(View.VISIBLE);
+                    dueClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                }else{
+                    checklistClearWhite.setVisibility(View.GONE);
+                    repeatClearWhite.setVisibility(View.VISIBLE);
+                    repeatClearWhite.setImageResource(R.drawable.subtasks_icon_light);
+                }
+            }
         }
 
         return taskView;
