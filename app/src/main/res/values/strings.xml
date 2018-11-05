@@ -88,7 +88,7 @@
     <string name="accessNoTasks">Scope of gun looking at large tick covered with bullet wounds.</string>
     <string name="accessEmptyCheckbox">Empty checkbox</string>
     <string name="accessCheckboxTick">Checkbox with a tick in it.</string>
-    <string name="accessGrayedOutCalendar">Grayed out calendar to indicate that no date is set.</string>
+    <string name="accessGrayedOutCalendar">Grayed out calenedar to indicate that no date is set.</string>
     <string name="accessCalendar">White and red calendar.</string>
     <string name="accessGrayedOutClock">Grayed out alarm clock indicating that time has not been set.</string>
     <string name="accessClock">Red and gray alarm clock.</string>
@@ -101,7 +101,7 @@
     <string name="accessTrashCan">Gray trash can representing a delete button.</string>
     <string name="accessMushroomCloudTick">Mushroom cloud with tick and five stars.</string>
     <string name="accessPlusSign">Plus sign for adding tasks.</string>
-    <string name="appNameFull">Blistful</string>
+    <string name="appNameFull">Blistful: Todo list, simple</string>
     <string name="buy">Buy</string>
     <string name="alarm">Alarm</string>
     <string name="turnColorCyclingOnOff">Turn colour cycling on/off in the top right menu.</string>
