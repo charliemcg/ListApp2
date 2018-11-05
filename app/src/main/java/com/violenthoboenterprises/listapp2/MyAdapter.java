@@ -1339,15 +1339,15 @@ class MyAdapter extends ArrayAdapter<String> {
                 MainActivity.alarmManager.cancel(MainActivity.pendIntent);
 
                 MainActivity.add.setVisibility(View.VISIBLE);
-                MainActivity.addIcon.setVisibility(View.VISIBLE);
+//                MainActivity.addIcon.setVisibility(View.VISIBLE);
 
                 MainActivity.vibrate.vibrate(50);
 
                 MainActivity.params.height = MainActivity.addHeight;
-                MainActivity.iconParams.height = MainActivity.addIconHeight;
+//                MainActivity.iconParams.height = MainActivity.addIconHeight;
 
                 taskView.setLayoutParams(MainActivity.params);
-                taskView.setLayoutParams(MainActivity.iconParams);
+//                taskView.setLayoutParams(MainActivity.iconParams);
 
                 new Reorder();
                 //Updating the view with the new order
@@ -2001,10 +2001,10 @@ class MyAdapter extends ArrayAdapter<String> {
 
                                             //Returns the 'add' button
                                             MainActivity.params.height = MainActivity.addHeight;
-                                            MainActivity.iconParams.height = MainActivity.addIconHeight;
+//                                            MainActivity.iconParams.height = MainActivity.addIconHeight;
 
                                             taskView.setLayoutParams(MainActivity.params);
-                                            taskView.setLayoutParams(MainActivity.iconParams);
+//                                            taskView.setLayoutParams(MainActivity.iconParams);
 
                                             MainActivity.theListView.setAdapter(MainActivity.theAdapter[0]);
 
@@ -2114,10 +2114,10 @@ class MyAdapter extends ArrayAdapter<String> {
 
                                             //Returns the 'add' button
                                             MainActivity.params.height = MainActivity.addHeight;
-                                            MainActivity.iconParams.height = MainActivity.addIconHeight;
+//                                            MainActivity.iconParams.height = MainActivity.addIconHeight;
 
                                             taskView.setLayoutParams(MainActivity.params);
-                                            taskView.setLayoutParams(MainActivity.iconParams);
+//                                            taskView.setLayoutParams(MainActivity.iconParams);
 
                                             MainActivity.repeating = false;
 
@@ -2386,11 +2386,11 @@ class MyAdapter extends ArrayAdapter<String> {
 
                                             //Returns the 'add' button
                                             MainActivity.params.height = MainActivity.addHeight;
-                                            MainActivity.iconParams.height =
-                                                    MainActivity.addIconHeight;
+//                                            MainActivity.iconParams.height =
+//                                                    MainActivity.addIconHeight;
 
                                             taskView.setLayoutParams(MainActivity.params);
-                                            taskView.setLayoutParams(MainActivity.iconParams);
+//                                            taskView.setLayoutParams(MainActivity.iconParams);
 
                                             MainActivity.theListView.setAdapter
                                                     (MainActivity.theAdapter[0]);
@@ -2509,11 +2509,11 @@ class MyAdapter extends ArrayAdapter<String> {
 
                                             //Returns the 'add' button
                                             MainActivity.params.height = MainActivity.addHeight;
-                                            MainActivity.iconParams.height =
-                                                    MainActivity.addIconHeight;
+//                                            MainActivity.iconParams.height =
+//                                                    MainActivity.addIconHeight;
 
                                             taskView.setLayoutParams(MainActivity.params);
-                                            taskView.setLayoutParams(MainActivity.iconParams);
+//                                            taskView.setLayoutParams(MainActivity.iconParams);
 
                                             MainActivity.repeating = false;
 
@@ -2763,11 +2763,11 @@ class MyAdapter extends ArrayAdapter<String> {
 
                                             //Returns the 'add' button
                                             MainActivity.params.height = MainActivity.addHeight;
-                                            MainActivity.iconParams.height =
-                                                    MainActivity.addIconHeight;
+//                                            MainActivity.iconParams.height =
+//                                                    MainActivity.addIconHeight;
 
                                             taskView.setLayoutParams(MainActivity.params);
-                                            taskView.setLayoutParams(MainActivity.iconParams);
+//                                            taskView.setLayoutParams(MainActivity.iconParams);
 
                                             MainActivity.theListView.setAdapter(MainActivity
                                                     .theAdapter[0]);
@@ -2865,11 +2865,11 @@ class MyAdapter extends ArrayAdapter<String> {
 
                                             //Returns the 'add' button
                                             MainActivity.params.height = MainActivity.addHeight;
-                                            MainActivity.iconParams.height =
-                                                    MainActivity.addIconHeight;
+//                                            MainActivity.iconParams.height =
+//                                                    MainActivity.addIconHeight;
 
                                             taskView.setLayoutParams(MainActivity.params);
-                                            taskView.setLayoutParams(MainActivity.iconParams);
+//                                            taskView.setLayoutParams(MainActivity.iconParams);
 
                                             MainActivity.repeating = false;
 
@@ -2977,15 +2977,15 @@ class MyAdapter extends ArrayAdapter<String> {
                             MainActivity.alarmManager.cancel(MainActivity.pendIntent);
 
                             MainActivity.add.setVisibility(View.VISIBLE);
-                            MainActivity.addIcon.setVisibility(View.VISIBLE);
+//                            MainActivity.addIcon.setVisibility(View.VISIBLE);
 
                             MainActivity.vibrate.vibrate(50);
 
                             MainActivity.params.height = MainActivity.addHeight;
-                            MainActivity.iconParams.height = MainActivity.addIconHeight;
+//                            MainActivity.iconParams.height = MainActivity.addIconHeight;
 
                             v.setLayoutParams(MainActivity.params);
-                            v.setLayoutParams(MainActivity.iconParams);
+//                            v.setLayoutParams(MainActivity.iconParams);
 
                         //update repeating task to be due at next available date
                         } else {
@@ -3567,10 +3567,10 @@ class MyAdapter extends ArrayAdapter<String> {
 
                         //Returns the 'add' button
                         MainActivity.params.height = MainActivity.addHeight;
-                        MainActivity.iconParams.height = MainActivity.addIconHeight;
+//                        MainActivity.iconParams.height = MainActivity.addIconHeight;
 
                         MainActivity.add.setLayoutParams(MainActivity.params);
-                        MainActivity.addIcon.setLayoutParams(MainActivity.iconParams);
+//                        MainActivity.addIcon.setLayoutParams(MainActivity.iconParams);
 
                         //Updates the view
                         MainActivity.theListView.setAdapter(MainActivity.theAdapter[0]);
@@ -3612,10 +3612,10 @@ class MyAdapter extends ArrayAdapter<String> {
 
                     //Returns the 'add' button
                     MainActivity.params.height = MainActivity.addHeight;
-                    MainActivity.iconParams.height = MainActivity.addIconHeight;
+//                    MainActivity.iconParams.height = MainActivity.addIconHeight;
 
                     MainActivity.add.setLayoutParams(MainActivity.params);
-                    MainActivity.addIcon.setLayoutParams(MainActivity.iconParams);
+//                    MainActivity.addIcon.setLayoutParams(MainActivity.iconParams);
 
                 }
             });
